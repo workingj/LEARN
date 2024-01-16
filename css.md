@@ -13,15 +13,17 @@
   - `padding` wird dann nach innen geschoben
 
 ## Specificity
+
 - the algorithm used by browsers to determine the CSS declaration that is the most relevant to an element
 
 ## CSS - Units
+
 - [MDN Values and Units](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units#numbers_lengths_and_percentages)
 
 - `px` size content to exact dimensions (hard coded)
--  `em` bezieht sich die Schriftgröße des HTML-Elementes (default font-size is 16px)
--  `rem` bezieht sich auf die Schriftgröße des root (<html>)-Elementes
--  `%` bezieht sich immer auf die größe des eltern lements
+- `em` bezieht sich die Schriftgröße des HTML-Elementes (default font-size is 16px)
+- `rem` bezieht sich auf die Schriftgröße des root (<html>)-Elementes
+- `%` bezieht sich immer auf die größe des eltern lements
 - `vh` steht für Viewport Height, wird in % Angegeben 100vh
 - `vw` steht für Viewport Width, wird in % Angegeben 100vh
 
@@ -34,12 +36,24 @@
 
 ## Selectors
 
--  `>` im slector wählt nur alles auf der nachfolgenden eben aus
+- `>` im slector wählt nur alles auf der nachfolgenden eben aus
+
+## [Variables](https://www.w3schools.com/css/css3_variables.asp)
+
+```css
+:root {
+  --blue: #1e90ff;
+  --white: #ffffff;
+}
+
+body { background-color: var(--blue); }
+```
 
 ## Proportional Imgage Scaling
 
 - design pattern used to scale images and videos proportionally
   ```css
+
   .container {
     width: 50%;
     height: 200px;
@@ -54,13 +68,14 @@
   ```
 
 ## Medieaqueries
-  kommen an ende des CSS dokuments
+
+- kommen an ende des CSS dokuments
 
 ## Nesting
 
 .class {
   dings 1
-  & span{
+  && span{
     dings 2
   }
 }
