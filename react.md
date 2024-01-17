@@ -4,6 +4,10 @@
 - ein Modul gibt immer ein Element zurück
 - daten in react fließen immer von oben anch unten
 
+## Best Practice
+
+- It's good practice to put everything that can go outside of a component outside of it
+
 ## Create new Project
 
 ### using Vite
@@ -126,6 +130,25 @@ handleClick = (id) => () => {
 ```
 
 ## UseEffect
+
+```javascript
+useEffect(() => {
+  //Runs only on the first render
+}, []);
+```
+
+```javascript
+useEffect(() => {
+  //Runs on every render
+});
+```
+
+```javascript
+useEffect(() => {
+  //Runs on the first render
+  //And any time any dependency value changes
+}, [prop, state]);
+```
 
 ## Routing
 

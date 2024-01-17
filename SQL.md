@@ -1,5 +1,9 @@
 # SQL
 
+- Relationale Datanbanken speichern Daten in Tabellen
+- Jede Zeile ein Tupel
+- (R)DBMS - Datenbank Management System
+
 ## Constraints
 
 - `NOT NULL` - Ensures that a column cannot have a `NULL` value
