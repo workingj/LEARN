@@ -1,10 +1,31 @@
 # NODE JS
 
+- [NODE JS](#node-js)
+  - [Overview](#overview)
+  - [Node-Specific Functionality](#node-specific-functionality)
+    - [Globals](#globals)
+    - [INSTALL](#install)
+      - [`install -D`](#install--d)
+      - [`install -g`](#install--g)
+  - [Simple Server](#simple-server)
+  - [nodemon / npm -watch](#nodemon--npm--watch)
+    - [nodemon](#nodemon)
+    - [npm --watch](#npm---watch)
+    - [Module](#module)
+  - [Node.js Built-in Modules](#nodejs-built-in-modules)
+    - [`process.env`](#processenv)
+  - [Import und Export von Modules in Node](#import-und-export-von-modules-in-node)
+  - [File Acces](#file-acces)
+    - [Sync](#sync)
+    - [Async](#async)
+
+## Overview
+
 - nvm node version manager
 - npm node package manager (yarn)
 - npx execute modules
-- `npm init`
-- `npm init -y`
+- `npm init` creates a note package
+- `npm init -y` creates a note package skips configuration
 
 ## Node-Specific Functionality
 
