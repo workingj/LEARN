@@ -16,11 +16,17 @@
 
 ### INSTALL
 
+[A friendly guide to `npm install` flags](https://7.dev/npm-install-flags/)
+
 #### `install -D`
 
 - only add the package to your “dev dependencies"
-  - `npm install --save-dev`
-  - `npm i -D`
+- `npm install --save-dev`
+- `npm i -D`
+
+#### `install -g`
+
+- `-g`, `--global`: If you want to use a package in lots of projects, you might install it globally, meaning it gets installed in a special place that all your Node.js projects can reach.
 
 ## Simple Server
 
@@ -59,7 +65,7 @@ server.listen(8080, () => console.log('Server is live on Port: 8000'));
 }
 ```
 
-### npm --wathch
+### npm --watch
 
 ```json
 {
