@@ -1,6 +1,6 @@
 # CSS
 
-- vertikale margins überschneiden sich... seit wann? 
+- vertikale margins überschneiden sich... seit wann?
 - MARGIN-COLLAPS werden reduziert auf den größten margin, und nciht beide addiert
 - die letzte css einstellung überschreibt immer die vorangehenden, git auch fpr verlinkt ccs files
 - spezifität läst sich in vscode auslesenen und entscheided daüber was höchste priorität hat
@@ -22,7 +22,7 @@
 
 - `px` size content to exact dimensions (hard coded)
 - `em` bezieht sich die Schriftgröße des HTML-Elementes (default font-size is 16px)
-- `rem` bezieht sich auf die Schriftgröße des root (<html>)-Elementes
+- `rem` bezieht sich auf die Schriftgröße des root `<html>`-Elementes
 - `%` bezieht sich immer auf die größe des eltern lements
 - `vh` steht für Viewport Height, wird in % Angegeben 100vh
 - `vw` steht für Viewport Width, wird in % Angegeben 100vh
@@ -52,6 +52,7 @@ body { background-color: var(--blue); }
 ## Proportional Imgage Scaling
 
 - design pattern used to scale images and videos proportionally
+
   ```css
 
   .container {
@@ -84,7 +85,8 @@ body { background-color: var(--blue); }
 
 Bestpractis: Mobile First
 
-### Breakpoints 
+### Breakpoints
+
 1920
 1200
 1024
@@ -99,6 +101,7 @@ Bestpractis: Mobile First
 - Verwendet Flex-Container und die darin enthaltenen Flex-Items
 
 ### Container
+
 - justify-content: defines the horizontal alignment of its items
     center
     flex-start
@@ -108,60 +111,59 @@ Bestpractis: Mobile First
 
 - align-items: defines the vertical alignment of its items
     center
-    flex-start		(top)
-    flex-end		(bottom)
+    flex-start  (top)
+    flex-end  (bottom)
     stretch
     baseline
-	
+
 - align-content: modifies the behavior of the flex-wrap property. It determines how to space rows from top to bottom. Multiple rows of items are needed for this property to take effect.
     center
-    flex-start		(top)
-    flex-end		(bottom)
+    flex-start  (top)
+    flex-end  (bottom)
     space-around
     space-between
-	stretch
+ stretch
 
-- flex-flow: Shorthand for the properties flex-direction and flex-wrap. 
-	flex-flow: flex-direction flexwrap;
+- flex-flow: Shorthand for the properties flex-direction and flex-wrap.
+ flex-flow: flex-direction flexwrap;
 
 ### Items
 
 - order works across row/column boundaries
 
-- align-self 
+- align-self
     center
-    flex-start		(top)
-    flex-end		(bottom)
+    flex-start  (top)
+    flex-end  (bottom)
     stretch
     baseline
 
 - flex: property defines the width of individual items in a flex container and allows them to have flexible widths depending on the weight given
-      flex: flex-grow flex-shrink flex-basis; 
-
-	  
+      flex: flex-grow flex-shrink flex-basis;
 
 #### Flex Items and Auto-Margins
-  - Auto-margins in flexbox are special. They can be used as an alternative to an extra <div> when trying to align a group of items to the left/right of a container.
-  - Auto-margins eat up all the extra space in a flex container
-  - margin-left: auto;
- 
+
+- Auto-margins in flexbox are special. They can be used as an alternative to an extra `<div>` when trying to align a group of items to the left/right of a container.
+- Auto-margins eat up all the extra space in a flex container
+- margin-left: auto;
+
 ### CONTAINER CONTROLS
 
-- `display: flex;` Aktiviert Flex Layout 
+- `display: flex;` Aktiviert Flex Layout
 - `flex-flow` Shorthand property for `flex-direction` and `flex-wrap`
 - `flex-direction: row | row-reverse | column | column-reverse` Defines how flexbox items are ordered within a flexbox container.  
     #- ### Ausrichtung des Inhalts abhängig von `flex-direction`
-    - `align-items: flex-start | flex-end | center | baseline | strech` rechts-links oder oben unten jenachdem ob row oder column
-    - `justify-content: flex-start | flex-end | center | space-between | space-around` Defines how flexbox/grid items are aligned according to main axis, within a flexbox/grid container.
+  - `align-items: flex-start | flex-end | center | baseline | strech` rechts-links oder oben unten jenachdem ob row oder column
+  - `justify-content: flex-start | flex-end | center | space-between | space-around` Defines how flexbox/grid items are aligned according to main axis, within a flexbox/grid container.
 
 - `flex-wrap: nowrap | wrap | wrap-reverse` Defines if flexbox items appear on a single line or on multiple lines within a flexbox container.
-    - `align-content: stretch | flex-start | flex-end | center | space-between | space-around` Defines how each line is aligned within a flexbox/grid container. Only applies if flex-wrap: wrap is present, and if there are multiple lines of flexbox/grid items.
+  - `align-content: stretch | flex-start | flex-end | center | space-between | space-around` Defines how each line is aligned within a flexbox/grid container. Only applies if flex-wrap: wrap is present, and if there are multiple lines of flexbox/grid items.
 
 ### ITEM CONTROLS
-    
+
 - `flex-grow : n` Defines how much a flexbox item should grow if there's space available. Relative value its behaviour depends on the value of the flexbox item siblings.
 - `flex-shrink: n` Defines how much a flexbox item should shrink if there's not enough space available. Relative value its behaviour depends on the value of the flexbox item siblings.
-- `flex-basis: (n)px | (n)em | (n)rem | (n)vw `Defines the initial size of a flexbox item ,wie width 
+- `flex-basis: (n)px | (n)em | (n)rem | (n)vw`Defines the initial size of a flexbox item ,wie width
 - `order: n | -n` Defines the order of a flexbox item.
 - `align-self: auto | flex-start | flex-end | center | baseline | stretch` Works like align-items, but applies only to a single flexbox item, instead of all of them.
 
@@ -170,8 +172,9 @@ Bestpractis: Mobile First
 ### HTML Meta Tags
 
 - [`viewport` Meta Tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Viewport_meta_tag#viewport_basics)
-- is the total viewable area for a user this area varies depending on device. 
-  - Based on the size of the viewport, the meta tag (<meta>) is used to instruct the browser on how to render the webpage’s scale and dimensions
+- is the total viewable area for a user this area varies depending on device.
+  - Based on the size of the viewport, the `<meta>` is used to instruct the browser on how to render the webpage’s scale and dimensions
+
   - ```html
     <meta name="viewport" content="width=device-width, initial-scale=1">
     ```
@@ -181,17 +184,18 @@ Bestpractis: Mobile First
 ```css
 @media only screen and (max-width: 480px) {}
 ```
+
 - `@media` — instructs the CSS compiler on how to parse the rest of the rule
 - `only` — Applies a style only if an entire query matches
 - `screen` — Indicates what types of devices should use this rule
-- `and` — Used for combining multiple media features together into a single media query, requiring each chained feature to return true for the query to be true. It is also used for joining media features with media types. 
+- `and` — Used for combining multiple media features together into a single media query, requiring each chained feature to return true for the query to be true. It is also used for joining media features with media types.
 - `(max-width: 480px)` Rul will be aplied only below the `max-width`
 
-### Media Features. 
+### Media Features
 
 - Media features are the conditions that must be met to render the CSS within a media query.
 
-#### Range Bsp:
+#### Range Bsp
 
 ```css
 @media only screen and (min-width: 320px) and (max-width: 480px) {

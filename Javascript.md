@@ -1,5 +1,33 @@
 # Javascript
 
+- [Javascript](#javascript)
+  - [Link to external JavaScript file `<script>`-Tag](#link-to-external-javascript-file-script-tag)
+  - [Keywords](#keywords)
+  - [Modules](#modules)
+  - [Operants](#operants)
+    - [`== & ===`](#--)
+  - [Objects](#objects)
+    - [Function Borrowing with `bind()`](#function-borrowing-with-bind)
+  - [Loops](#loops)
+    - [for...of](#forof)
+  - [Export - Import, exposing to other files](#export---import-exposing-to-other-files)
+  - [Date and Time](#date-and-time)
+  - [URL'S](#urls)
+  - [Functions](#functions)
+    - [Anonymous Functions](#anonymous-functions)
+    - [Higher Order Functions](#higher-order-functions)
+  - [Explicit Function Binding](#explicit-function-binding)
+  - [Scheduling Functions with setTimeout and setInterval](#scheduling-functions-with-settimeout-and-setinterval)
+  - [Zero delay setTimeout](#zero-delay-settimeout)
+  - [Array Functions](#array-functions)
+  - [Async/Await](#asyncawait)
+    - [Async Syntax](#async-syntax)
+    - [Await Syntax](#await-syntax)
+    - [Promises](#promises)
+      - [Creating your own Promis](#creating-your-own-promis)
+  - [Fetch API](#fetch-api)
+    - [Fetch Sending](#fetch-sending)
+
 ## Link to external JavaScript file [`<script>`-Tag](https://www.w3schools.com/tags/tag_script.asp)
 
 - `defer` ensures that the entire HTML file has been parsed before the script is executed
@@ -64,6 +92,17 @@ console.log(num == str); // true - The values are the same after type conversion
 console.log(num === str); // false - The values are different types and not equal
 ```
 
+## Objects
+
+```javascript
+console.log(Object.keys(data));
+console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(data)));
+```
+
+### Function Borrowing with `bind()`
+
+- With the `bind()` method, an object can borrow a method from another object.
+
 ## Loops
 
 ### [for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of?retiredLocale=de)
@@ -78,7 +117,7 @@ for (const value of iterable) {
 }
 ```
 
-## Exposing to Other Files
+## Export - Import, exposing to other files
 
 ```javascript
 // file.js
@@ -104,6 +143,31 @@ console.log(now.getHours() + ":" + now.getMinutes());
 console.log(now.getDate() + "." + now.getMonth());
 ```
 
+## URL'S
+
+```javascript
+const url = new URL('https://example.com/');
+
+for (field in url) {
+  console.log(field);
+}
+
+const plainObject = {
+  hash:         url.hash,
+  host:         url.host,
+  hostname:     url.hostname,
+  href:         url.href,
+  origin:       url.origin,
+  password:     url.password,
+  pathname:     url.pathname,
+  port:         url.port,
+  protocol:     url.protocol,
+  search:       url.search,
+  searchParams: url.searchParams,
+  username:     url.username
+}
+```
+
 ## Functions
 
 - Functions parameter can have default values
@@ -121,10 +185,6 @@ console.log(now.getDate() + "." + now.getMonth());
 - funcitons that take or return other functions are called higher order functions
 - Functions as Arguments are commonly refered as Callback functions
 - functions can be createt at runtime and returnd from an other function
-
-## Function Borrowing
-
-- With the `bind()` method, an object can borrow a method from another object.
 
 ## Explicit Function Binding
 
