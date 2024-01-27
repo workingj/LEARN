@@ -1,8 +1,17 @@
 # ExpressJS
 
-- zum schnellen und einfachen erstellen von API's
-- light weight, MVC architecture
-- `npm install express`
+- [ExpressJS](#expressjs)
+  - [Basic Server with Express/CommonJS](#basic-server-with-expresscommonjs)
+    - [Routing](#routing)
+  - [Set HTTP STATUS CODE for a Response](#set-http-status-code-for-a-response)
+  - [GET](#get)
+    - [Respons Type: String](#respons-type-string)
+    - [Respons Type: JSON](#respons-type-json)
+    - [Respons Type: HTML](#respons-type-html)
+    - [Respons Type: Download](#respons-type-download)
+    - [Respons Type: Redirect](#respons-type-redirect)
+  - [Get Elements from an URL (parmas \& querys)](#get-elements-from-an-url-parmas--querys)
+  - [View Engines](#view-engines)
 
 ## Basic Server with Express/CommonJS
 
@@ -66,7 +75,7 @@ app.get((req, res) => {
         age: 30,
         mail: 'joe@mail.com'
     }
-app.json(data);
+    res.json(data);
 });
 ```
 
@@ -95,14 +104,52 @@ app.get((req, res) => {
 });
 ```
 
-
+## Get Elements from an URL (parmas & querys)
 
 ```javascript
-
-apt .get('/users/:id', (req res) => {
+apt.get('/users/:id', (req res) => {
     console.log(req.params.id));
     console.log(req.query.sort));
+
     res.send('Check your server console!');
-    
-    });
+});
+```
+
+## View Engines
+
+```javascript
+app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
+
+app.get('/pug', (req, res) => res.render('index'));
+app.get('/ejs', (req, res) => res.render('index'));
+```
+
+```javascript
+// ./views/index.ejs
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EXPRESS JS</title>
+  </head>
+  <body>
+    <h1>To Learn</h1>
+    <ul>
+      <li>RESPONSE TYPES</li>
+      <li>VIEW ENGINES</li>
+    </ul>
+  </body>
+</html>
+```
+
+```javascript
+// ./views/index.pug
+html
+    head
+        title COOL PUG TITLE
+    body
+        h1 PUG ENGINE
+        p SOMETHING
 ```

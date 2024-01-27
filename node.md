@@ -12,12 +12,23 @@
     - [nodemon](#nodemon)
     - [npm --watch](#npm---watch)
     - [Module](#module)
-  - [Node.js Built-in Modules](#nodejs-built-in-modules)
+  - [Node.js Built-in Core-Modules](#nodejs-built-in-core-modules)
     - [`process.env`](#processenv)
   - [Import und Export von Modules in Node](#import-und-export-von-modules-in-node)
-  - [File Acces](#file-acces)
+  - [File Access](#file-access)
     - [Sync](#sync)
+      - [Reading](#reading)
     - [Async](#async)
+      - [Reading](#reading-1)
+      - [Writing](#writing)
+      - [Deleting](#deleting)
+    - [Directorys](#directorys)
+    - [Streams](#streams)
+      - [reading from streams](#reading-from-streams)
+      - [writing to streams](#writing-to-streams)
+      - [piping](#piping)
+  - [Events](#events)
+  - [Global Oject](#global-oject)
 
 ## Overview
 
@@ -57,15 +68,15 @@ console.log(process.env.PWD);
 console.log(process.memoryUsage());
 console.log(process.argv);
 
-const http = require('http');
+const http = require("http");
 
 const requestListener = (req, res) => {
-    res.writeHead(200);
-    res.end('Hello, Wold!');
-}
+  res.writeHead(200);
+  res.end("Hello, Wold!");
+};
 
 const server = http.createServer(requestListener);
-server.listen(8080, () => console.log('Server is live on Port: 8000'));
+server.listen(8080, () => console.log("Server is live on Port: 8000"));
 ```
 
 **Run** `server.js`with `node server.js`
@@ -79,10 +90,10 @@ server.listen(8080, () => console.log('Server is live on Port: 8000'));
 
 ```json
 {
-    "sripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "alias": "nodemon filename.js"
-    }
+  "sripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "alias": "nodemon filename.js"
+  }
 }
 ```
 
@@ -90,19 +101,18 @@ server.listen(8080, () => console.log('Server is live on Port: 8000'));
 
 ```json
 {
-    "sripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "alias": "node --watch filename.js"
-    }
+  "sripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "alias": "node --watch filename.js"
+  }
 }
-
 ```
 
 ### Module
 
 - [Node Modules Documentation](https://nodejs.org/dist/latest/docs/api/)
 
-## [Node.js Built-in Modules](https://www.w3schools.com/nodejs/ref_modules.asp)
+## [Node.js Built-in Core-Modules](https://www.w3schools.com/nodejs/ref_modules.asp)
 
 ### [`process.env`](https://nodejs.org/api/process.html)
 
@@ -122,7 +132,7 @@ console.log(process.argv);
   - **export:** `module.export`
 
 ```javascript
-const http = require('http');
+const http = require("http");
 ```
 
 - **ES modules**
@@ -130,42 +140,158 @@ const http = require('http');
   - or nearest `package.json` needs property set to `"type": "module"`
 
 ```javascript
-import http from 'http';
+import http from "http";
+import fs from "fs";
+import os from "os";
 ```
 
-## File Acces
+## File Access
+
+- [NODEJS DOCS: Node Filesystem Module](https://nodejs.org/api/fs.html)
+- [W3 Node.js File System Module](https://www.w3schools.com/nodejs/ref_fs.asp)
 
 ### Sync
 
+#### Reading
+
 ```javascript
-import fs from 'fs';
-
-const file = './file.txt';
-
 try {
-    const data = fs.readFileSync(file, 'utf-8');
-    console.log("file: ",data);
-} catch(err) {
-    console.error("file: ",data);
+  const data = fs.readFileSync("./file.txt", "utf8");
+  console.log("file: ", data);
+} catch (err) {
+  console.error("file: ", data);
 }
 ```
 
 ### Async
 
-```javascript
-import fs from 'fs';
+#### Reading
 
-const file = './file.txt';
+```javascript
+import fs from "fs";
 
 try {
-    const data = fs.readFile(file, 'utf-8', (err, data)=> {
-        if(err) return console.error(`ERROR::read ${file}:`, err);
-        
-        console.log(`FILE: ${file}:`,data);
-        return data;
-    });
-    console.log("file: ",data);
-} catch(err) {
-    console.error("file: ",data);
+  const data = fs.readFile("./file.txt", "utf-8", (err, data) => {
+    if (err) return console.error(`ERROR::read ${file}:`, err);
+
+    console.log(`FILE: ${file}:`, data);
+    return data;
+  });
+  console.log("file: ", data);
+} catch (err) {
+  console.error("file: ", data);
 }
+```
+
+#### Writing
+
+```javascript
+// writing files
+fs.writeFile("./docs/blog.txt", "hello, world", () => {
+  console.log("file was written");
+});
+```
+
+#### Deleting
+
+```javascript
+// deleting files
+if (fs.existsSync("./docs/deleteme.txt")) {
+  fs.unlink("./docs/deleteme.txt", (err) => {
+    if (err) {
+      console.error(err);
+    }
+    console.log("file deleted");
+  });
+}
+```
+
+### Directorys
+
+```javascript
+// directories
+if (!fs.existsSync("./assets")) {
+  fs.mkdir("./assets", (err) => {
+    if (err) {
+      console.error(err);
+    }
+    console.log("folder created");
+  });
+} else {
+  fs.rmdir("./assets", (err) => {
+    if (err) {
+      console.error(err);
+    }
+    console.log("folder deleted");
+  });
+}
+```
+
+### Streams
+
+#### reading from streams
+
+```javascript
+const fs = require('fs');
+const readStream = fs.createReadStream('./docs/blog3.txt', { encoding: 'utf8'});
+
+readStream.on('data', chunk => {
+  console.log(c'----- new chunk -----');
+  console.log(chunck);
+});
+```
+
+#### writing to streams
+
+```javascript
+const readStream = fs.createReadStream("./docs/blog3.txt", {encoding: "utf8",});
+const writeStream = fs.createWriteStream("./docs/blog4.txt");
+
+readStream.on("data", (chunk) => {
+  writeStream.write("\nNEW CHUNK:\n");
+  writeStream.write(chunk);
+});
+```
+
+#### piping
+
+```javascript
+const readStream = fs.createReadStream("./docs/blog3.txt", {encoding: "utf8",});
+const writeStream = fs.createWriteStream("./docs/blog4.txt");
+readStream.pipe(writeStream);
+```
+
+## Events
+
+```javascript
+// Require in the 'events' core module
+let events = require("events");
+
+// Create an instance of the EventEmitter class
+let myEmitter = new events.EventEmitter();
+
+let newUserListener = (data) => {
+  console.log(`We have a new user: ${data}.`);
+};
+
+// Assign the newUserListener function as the listener callback for 'new user' events
+myEmitter.on("new user", newUserListener);
+
+// Emit a 'new user' event
+myEmitter.emit("new user", "Lily Pad"); //newUserListener will be invoked with 'Lily Pad'
+```
+
+## [Global Oject](https://nodejs.org/api/globals.html)
+
+- A global object is an object that always exists in the global scope.
+- like the `window`-Object in the browse, is implied, no need to be called
+
+```javascript
+// The directory name of the current module This is the same as the path.dirname(__filename)
+console.log(__dirname);
+// Prints: /Users/mjr
+
+// The file name of the current module, the current module file's absolute path with symlinks resolved.
+console.log(__filename);
+// Prints: /Users/mjr/example.js
 ```
