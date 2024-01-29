@@ -19,6 +19,11 @@
 const express = require('express');
 const app = express();
 const PORT = prorcess.env.PORT || 8000;
+
+app.listen(PORT, (err) => {
+    if (err) return console.error(err);
+    console.log(`Server is listening on Port: ${PORT} http://localhost:${PORT}`)
+});
 ```
 
 ### Routing
@@ -32,9 +37,6 @@ app.post('/',(req, res) => res.send('We Create a resource !'));
 app.put('/',(req, res) => res.send('Replace a resource !')); // repllace
 app.patch('/',(req, res) => res.send('Update a resource !')); //update
 app.delete('/',(req, res) => res.send('Delete a resource !'));
-
-app.listen(PORT, () =>> console.log(`Server is listening on Port: ${PORT}`));
-
 ```
 
 **or with cleaner code for the same route**
