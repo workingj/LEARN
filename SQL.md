@@ -1,8 +1,34 @@
 # SQL
 
-- Relationale Datanbanken speichern Daten in Tabellen
-- Jede Zeile ein Tupel
-- (R)DBMS - Datenbank Management System
+- [SQL](#sql)
+  - [Constraints](#constraints)
+  - [SQL Operators](#sql-operators)
+    - [SQL Logical Operators](#sql-logical-operators)
+    - [SQL Arithmetic Operators](#sql-arithmetic-operators)
+    - [SQL Comparison Operators](#sql-comparison-operators)
+    - [SQL Compound Operators](#sql-compound-operators)
+    - [SQL Bitwise Operators](#sql-bitwise-operators)
+  - [Comments](#comments)
+  - [SQL Statement](#sql-statement)
+    - [CREATE TABLE](#create-table)
+    - [ALTER TABLE](#alter-table)
+    - [DROP TABLE](#drop-table)
+    - [INSERT INTO](#insert-into)
+    - [SELECT](#select)
+    - [SELECT DISTINCT](#select-distinct)
+    - [SELECT INTO](#select-into)
+    - [UPDATE](#update)
+    - [DELETE FROM](#delete-from)
+    - [AS](#as)
+    - [WHERE](#where)
+    - [LIKE](#like)
+    - [IS NULL](#is-null)
+    - [IS NOT NULL](#is-not-null)
+    - [BETWEEN](#between)
+    - [OR](#or)
+    - [ORDER BY](#order-by)
+    - [LIMIT, SELECT TOP and ROWNUM](#limit-select-top-and-rownum)
+    - [CASE](#case)
 
 ## Constraints
 

@@ -20,6 +20,7 @@
   - [Scheduling Functions with setTimeout and setInterval](#scheduling-functions-with-settimeout-and-setinterval)
   - [Zero delay setTimeout](#zero-delay-settimeout)
   - [Array Functions](#array-functions)
+    - [Sort strings in objects](#sort-strings-in-objects)
   - [Async/Await](#asyncawait)
     - [Async Syntax](#async-syntax)
     - [Await Syntax](#await-syntax)
@@ -244,6 +245,26 @@ const plainObject = {
 - [**`.filter()`**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) checks every element in an array to see if it meets certain criteria and returns a new array with the elements that return truthy for the criteria.
 - [**`.findIndex()`**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex) returns the index of the first element of an array that satisfies a condition in the callback function. It returns -1 if none of the elements in the array satisfies the condition.
 - [**`.reduce()`**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) iterates through an array and takes the values of the elements and returns a single value.
+
+### Sort strings in objects
+
+```javascript
+const data = {
+    "id": 1,
+    "name": "Russian Federation (the)",
+ },
+ {
+     "id": 2,
+     "name": "Bhutan",
+ },
+
+const sdata = data.sort((a, b) => {
+    if (a.name < b.name) { return -1; }
+    if (a.name > b.name) { return 1; }
+    return 0;
+});
+
+```
 
 ## Async/Await
 
