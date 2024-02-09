@@ -1,8 +1,13 @@
 # react
 
-- React ist fpr SPA's gedacht
-- ein Modul gibt immer ein Element zurück
-- daten in react fließen immer von oben anch unten
+- [react](#react)
+  - [Best Practice](#best-practice)
+  - [Create new Project](#create-new-project)
+  - [Modules](#modules)
+  - [How to pass a parameter to an event handler or callback?](#how-to-pass-a-parameter-to-an-event-handler-or-callback)
+  - [UseEffect](#useeffect)
+  - [Routing](#routing)
+  - [Fetching](#fetching)
 
 ## Best Practice
 

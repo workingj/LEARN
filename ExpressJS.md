@@ -2,14 +2,8 @@
 
 - [ExpressJS](#expressjs)
   - [Basic Server with Express/CommonJS](#basic-server-with-expresscommonjs)
-    - [Routing](#routing)
   - [Set HTTP STATUS CODE for a Response](#set-http-status-code-for-a-response)
   - [GET](#get)
-    - [Respons Type: String](#respons-type-string)
-    - [Respons Type: JSON](#respons-type-json)
-    - [Respons Type: HTML](#respons-type-html)
-    - [Respons Type: Download](#respons-type-download)
-    - [Respons Type: Redirect](#respons-type-redirect)
   - [Get Elements from an URL (parmas \& querys)](#get-elements-from-an-url-parmas--querys)
   - [View Engines](#view-engines)
 
