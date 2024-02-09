@@ -5,29 +5,19 @@
   - [Keywords](#keywords)
   - [Modules](#modules)
   - [Operants](#operants)
-    - [`== & ===`](#--)
   - [Objects](#objects)
-    - [Function Borrowing with `bind()`](#function-borrowing-with-bind)
   - [Loops](#loops)
-    - [for...of](#forof)
   - [Export - Import, exposing to other files](#export---import-exposing-to-other-files)
   - [Date and Time](#date-and-time)
   - [URL'S](#urls)
   - [Functions](#functions)
-    - [Anonymous Functions](#anonymous-functions)
-    - [Higher Order Functions](#higher-order-functions)
   - [Explicit Function Binding](#explicit-function-binding)
   - [Scheduling Functions with setTimeout and setInterval](#scheduling-functions-with-settimeout-and-setinterval)
   - [Zero delay setTimeout](#zero-delay-settimeout)
   - [Array Functions](#array-functions)
-    - [Sort strings in objects](#sort-strings-in-objects)
   - [Async/Await](#asyncawait)
-    - [Async Syntax](#async-syntax)
-    - [Await Syntax](#await-syntax)
-    - [Promises](#promises)
-      - [Creating your own Promis](#creating-your-own-promis)
   - [Fetch API](#fetch-api)
-    - [Fetch Sending](#fetch-sending)
+  - [Date \& Time](#date--time)
 
 ## Link to external JavaScript file [`<script>`-Tag](https://www.w3schools.com/tags/tag_script.asp)
 
@@ -373,3 +363,13 @@ const myFetchFunctionAsync = async () => {
 ```
 
 ### Fetch Sending
+
+
+## Date & Time
+
+```javascript
+var date = new Date();
+console.log(date);
+console.log(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`);
+console.log(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
+```

@@ -1,16 +1,18 @@
 # CSS
 
-- vertikale margins überschneiden sich... seit wann?
-- MARGIN-COLLAPS werden reduziert auf den größten margin, und nciht beide addiert
-- die letzte css einstellung überschreibt immer die vorangehenden, git auch fpr verlinkt ccs files
-- spezifität läst sich in vscode auslesenen und entscheided daüber was höchste priorität hat
-- [Pseudo Klasse](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes?retiredLocale=de#tree-structural_pseudo-classes)
-- Attribut Selektoren
-- margin auto zentriert horizontal
-- bestimt auf welchen Teil der Box sich `width` and `height` beziehen
-  - `box-sizing:content-box` = std
-  - `box-sizing:border-box`
-  - `padding` wird dann nach innen geschoben
+- [CSS](#css)
+  - [Specificity](#specificity)
+  - [CSS - Units](#css---units)
+  - [Relative Measurements and Proportional scaling](#relative-measurements-and-proportional-scaling)
+  - [Selectors](#selectors)
+  - [Variables](#variables)
+  - [Proportional Imgage Scaling](#proportional-imgage-scaling)
+  - [Medieaqueries](#medieaqueries)
+  - [Nesting](#nesting)
+  - [Responsive](#responsive)
+  - [FLEXBOX](#flexbox)
+  - [RESPONSIVE SITES WITH CSS](#responsive-sites-with-css)
+  - [Flip or Reverse Text Using CSS](#flip-or-reverse-text-using-css)
 
 ## Specificity
 
@@ -240,3 +242,26 @@ Bestpractis: Mobile First
 ```
 
 - `orientation: portrait`
+
+
+## Flip or Reverse Text Using CSS
+
+As title says, we can Flip Text Upside Down or Reverse Text using CSS only(Rather than some jQuery Plugin or JavaScript). The CSS is completely Cross-browser compatible(Yeah, even older IEs), check out the CSS below.
+
+### Flipping Text Upside Down
+
+```css
+-webkit-transform:rotate(-180deg);
+-moz-transform:rotate(-180deg);
+-o-transform:rotate(-180deg);
+transform:rotate(-180deg);
+ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+```
+
+### Reversing Text
+
+```css
+direction: rtl;
+unicode-bidi: bidi-override;
+```
