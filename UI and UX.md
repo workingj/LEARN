@@ -2,7 +2,7 @@
 
 ## Gestalt Prinzipien
 
-- Menschen ordnen Elemente 
+- Das Gehirn ordnet Elemente 
  --- 
 - **Nähe:** Elemente, die näher aneinander liegen, werden ebenfalls als zusammengehörig wahrgenommen.
 - **Ähnlichkeit**: Elemente, die einander ähnlich sind, werden als zusammengehörig wahrgenommen.
