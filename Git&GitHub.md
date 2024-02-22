@@ -126,9 +126,6 @@ Any commits you make will be made on the branch you’re currently “checked ou
 - `git diff [sourcebranch] [targetbranch]` Preview changes, before merging
 - `git merge [branch]` merge the speciﬁed branch’s history into the current one This is usually done in pull requests
 
-- `git log` show all commits in the current branch’s history
-- `git log --oneline` show all commits less verbose
-
 ## STAGING, COMMITING and SNAPSHOTS
 
 Working with snapshots and the Git staging area
@@ -169,7 +166,8 @@ Retrieving updates from another repository and updating local repos
 
 Examining logs, diffs and object information
 
-- `git log` show the commit history for the currently active branch
+- `git log` show all commits in the current branch’s history
+- `git log --oneline` show all commits less verbose
 - `git log branchB..branchA` show the commits on branchA that are not on branchB
 - `git log --follow [file]` show the commits that changed file, even across renames
 - `git diff branchB...branchA` show the diff of what is in branchA that is not in branchB
