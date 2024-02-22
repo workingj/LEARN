@@ -57,6 +57,9 @@
 - **Alias** `git checkout` to `git co`
   `git config --global alias.co checkout`
 
+- System wide **ignore pattern** for all local repositories
+  `git config --global core.excludesfile [file]`
+
 ### SSH
 
 - SSH Key für Github.com generieren
@@ -93,6 +96,18 @@ A new repository can either be created locally, or an existing repository can be
 - `git remote -v` List all currently configured remote repositorie`
 - `git clone [url]` Clone (download) a repository that already exists on GitHub, including all of the files, branches, and commits
 
+## GITIGNORE
+
+You can find helpful templates for `.gitignore` files at [github.com/github/gitignore](https://github.com/github/gitignore).
+Preventing unintentional staging or commiting of files
+
+    logs/
+    *.notes
+    pattern*/
+
+**Save a file with desired patterns as .gitignore** with either direct string
+matches or wildcard globs.
+
 ## BRANCHES & MERGING
 
 Isolating work in branches, changing context, and integrating changes
@@ -127,12 +142,14 @@ Working with snapshots and the Git staging area
 - `git commit -m “[descriptive message]”` commit your staged content as a new commit snapshot
 - `git commit -a -m "message"` Commit any files you’ve added with git add, and also commit any files you’ve changed:
 
-### Redo commits
+## STASH TEMPORARY COMMITS
 
-Erase mistakes and craft replacement history
+Temporarily store modiﬁed, tracked ﬁles in order to change branches
 
-- `git reset [commit]` Undoes all commits after [commit], preserving changes locally
-- `git reset --hard [commit]` Discards all history and changes back to the specified commit. CAUTION! Changing history can have nasty side effects
+- `git stash` Save modiﬁed and staged changes
+- `git stash list` list stack-order of stashed ﬁle changes
+- `git stash pop` write working from top of stash stack
+- `git stash drop` discard the changes from top of stash stack
 
 ## PUSHING, SHARING & UPDATING
 
@@ -158,22 +175,32 @@ Examining logs, diffs and object information
 - `git diff branchB...branchA` show the diff of what is in branchA that is not in branchB
 - `git show [SHA]` show any object in Git in human-readable format
 
-## Tags
+### REDO COMMITS
 
-1. `git tag 1.0.0 < commitID >` You can use tagging to mark a significant changeset, such as a release. CommitId is the leading characters of the changeset ID, up to 10, but must be unique.
-2. `git log` Get the ID using:
-3. `git push --tags origin` Push all tags to remote repository:
+Erase mistakes and craft replacement history
 
-## Undo local changes
+- `git reset [commit]` Undoes all commits after [commit], preserving changes locally
+- `git reset --hard [commit]` Discards all history and changes back to the specified commit. CAUTION! Changing history can have nasty side effects
+
+## REWRITE HISTORY
+
+Rewriting branches, updating commits and clearing history
+
+- `git rebase [branch]` apply any commits of current branch ahead of speciﬁed one
+- `git reset --hard [commit]` clear staging area, rewrite working tree from speciﬁed commi
+
+## UNDO LOCAL CHANGES
 
 1. `git checkout -- <filename>` You can replace the changes in your working tree with:
 2. `git fetch origin git reset --hard origin/master` To drop all your local changes and commits, fetch the latest history from the server and point your local master branch at it, do this:
 
 - `git restore index.html` will undo all uncommitted local changes in the specified file. Please be careful because you cannot get these changes back once you've discarded them!
 
-## The .gitignore file
+## Tags
 
-Sometimes it may be a good idea to exclude files from being tracked with Git. This is typically done in a special file named `.gitignore`. You can find helpful templates for `.gitignore` files at [github.com/github/gitignore](https://github.com/github/gitignore).
+1. `git tag 1.0.0 < commitID >` You can use tagging to mark a significant changeset, such as a release. CommitId is the leading characters of the changeset ID, up to 10, but must be unique.
+2. `git log` Get the ID using:
+3. `git push --tags origin` Push all tags to remote repository
 
 ## Commands
 
