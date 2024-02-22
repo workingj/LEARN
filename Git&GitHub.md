@@ -40,61 +40,45 @@
   - [Tipps](#tipps)
   - [git help](#git-help)
 
-
 ## Configure Git
 
 - Configure **user** name to be used with your commits.
-  
-  ```console
-  git config --global user.email
-  ```
+  `git config --global user.email`
 
 - Configure the **email** address to be used with your commits.
-
-  ```console
-  git config --global user.email workingj@pm.me
-  ```
+  `git config --global user.email workingj@pm.me`
 
 - Set the **default Editor**
-
-  ```console
-  git config --global core.editor "code --wait"
-  ```
+  `git config --global core.editor "code --wait"`
 
 - Enables helpful **colorization** of command line output
-
-  ```console
-  git config --global color.ui auto` 
-  ```
+  `git config --global color.ui auto`
 
 - **Alias** `git checkout` to `git co`
-
-  ```console
-  git config --global alias.co checkout
-  ```
+  `git config --global alias.co checkout`
 
 ### SSH
 
 - SSH Key für Github.com generieren
 
-    ```console
-    ssh-keygen -t ed25519 -C "adress@server"
-    ```
+  `console
+ssh-keygen -t ed25519 -C "adress@server"
+`
 
 - Kopieren des SSH-Keys in den Zwischenspeicher und bei Github einfügen
 
-    ```console
-    clip < ~/.ssh/id_ed25519.pub
-    ```
+  `console
+clip < ~/.ssh/id_ed25519.pub
+`
 
 - SSH Zugang Testen & Fingerprint vergleichen:
 
-    ```ssh -T git@github.com```
+  `ssh -T git@github.com`
 
-    SHA256:uNiVztksCsDhcc0u9e8BujQXVUpKZIDTMczCvj3tD2s (RSA)
-    SHA256:br9IjFspm1vxR3iA35FWE+4VTyz1hYVLIE2t1/CeyWQ (DSA – veraltet)
-    SHA256:p2QAMXNIC1TJYWeIOttrVc98/R1BUFWu3/LiyKgUfQM (ECDSA)
-    SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU (Ed25519)
+  SHA256:uNiVztksCsDhcc0u9e8BujQXVUpKZIDTMczCvj3tD2s (RSA)
+  SHA256:br9IjFspm1vxR3iA35FWE+4VTyz1hYVLIE2t1/CeyWQ (DSA – veraltet)
+  SHA256:p2QAMXNIC1TJYWeIOttrVc98/R1BUFWu3/LiyKgUfQM (ECDSA)
+  SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU (Ed25519)
 
 ## Usefull Overview
 
@@ -104,324 +88,92 @@
 
 A new repository can either be created locally, or an existing repository can be cloned. When a repository was initialized locally, you have to push it to GitHub afterwards.
 
-- ```$ git init``` The git init command turns an existing directory into a new Git repository inside the folder you are running this command. After using the git init command, link the local repository to an empty GitHub repository using the following command:
+- `git init` turns an existing directory into a new Git repository inside the folder you are running this command. After using the git init command, link the local repository to an empty GitHub repository using the following command:
+- `git remote add origin [url]` Specifies the remote repository for your local repository. The url points to a repository on GitHub.
+- `git remote -v` List all currently configured remote repositorie`
+- `git clone [url]` Clone (download) a repository that already exists on GitHub, including all of the files, branches, and commits
 
-- ```$ git remote add origin [url]``` Specifies the remote repository for your local repository. The url points to a repository on GitHub.
+## BRANCHES & MERGING
 
-- ```$ git clone [url]``` Clone (download) a repository that already exists on GitHub, including all of the files, branches, and commits
+Isolating work in branches, changing context, and integrating changes
+Any commits you make will be made on the branch you’re currently “checked out” to.
 
-## Branches
+- `git status` to see which branch that is.
+- `git branch` list your branches. a \* will appear next to the currently active branch
+- `git branch -M main` rename master to main
+- `git branch [branch-name]` create a new branch at the current commit
+- `git branch -d [branch-name]` Deletes the specified branch
 
-Branches are an important part of working with Git. Any commits you make will be made on the branch you’re currently “checked out” to. Use `git status` to see which branch that is.
+- `git checkout <branchname>` switch to another branch and check it out into your working directory
+- `git checkout -b <branchname>` Create a new branch and switch to it
 
-- ```$ git branch -M main``` rename master to main
+- `git switch -c [branch-name]` Switches to the specified branch and updates the working directory
+- `git diff [sourcebranch] [targetbranch]` Preview changes, before merging
+- `git merge [branch]` merge the speciﬁed branch’s history into the current one This is usually done in pull requests
 
-- ```$ git branch [branch-name]``` Creates a new branch
+- `git log` show all commits in the current branch’s history
+- `git log --oneline` show all commits less verbose
 
-- ```$ git switch -c [branch-name]``` Switches to the specified branch and updates the working directory
+## STAGING, COMMITING and SNAPSHOTS
 
-- ```$ git merge [branch]``` Combines the specified branch’s history into the current branch. This is usually done in pull requests, but is an important Git operation.
+Working with snapshots and the Git staging area
 
-- ```$ git branch -d [branch-name]``` Deletes the specified branch
+- `git status` show modiﬁed ﬁles in working directory, staged for your next commit
+- `git add [file]` add a ﬁle as it looks now to your next commit (stage)
+- `git add .` Add all files to staging for your next commit
+- `git reset [file]` unstage a ﬁle while retaining the changes in working directory
+- `git diff` diﬀ of what is changed but not staged
+- `git diff --staged` diﬀ of what is staged but not yet committed
+- `git commit -m “[descriptive message]”` commit your staged content as a new commit snapshot
+- `git commit -a -m "message"` Commit any files you’ve added with git add, and also commit any files you’ve changed:
 
-### Branches Workflow
-
-1. ```$ git checkout -b <branchname>``` Create a new branch and switch to it:
-
-2. ```$ git checkout <branchname>``` Switch from one branch to another:
-
-3. ```$ git branch``` List all the branches in your repo, and tell you what branch you’re currently in:
-
-4. ```$ git branch -d <branchname>``` Delete the feature branch:
-
-5. ```$ git push --all origin``` Push all branches to your remote repository:
-
-6. ```$ git push origin :<branchname>``` Push a branch into your remote repository:
-
-7. ```$ git add <filename>``` or ```git add .``` Add one or more files to staging
-
-## Commit
-
-- `$ git commit -m "Commit message"` Commit changes to head:
-- ``$ git commit -a -m "message"`` Commit any files you’ve added with git add, and also commit any files you’ve changed:
-
-## Push
-
-- ```$ git push origin master``` Send changes to the master branch of your remote repository
-
-## Redo commits
+### Redo commits
 
 Erase mistakes and craft replacement history
 
-- ```$ git reset [commit]``` Undoes all commits after [commit], preserving changes locally
+- `git reset [commit]` Undoes all commits after [commit], preserving changes locally
+- `git reset --hard [commit]` Discards all history and changes back to the specified commit. CAUTION! Changing history can have nasty side effects
 
-- ```$ git reset --hard [commit]``` Discards all history and changes back to the specified commit. CAUTION! Changing history can have nasty side effects
+## PUSHING, SHARING & UPDATING
+
+Retrieving updates from another repository and updating local repos
+
+- `git remote add [alias] [url]` add a git URL as an alias
+- `git fetch [alias]` fetch down all the branches from that Git remote
+- `git merge [alias]/[branch]` merge a remote branch into your current branch to bring it up to date
+- `git push [alias] [branch]` Transmit local branch commits to the remote repository branch
+- `git pull` fetch and merge any commits from the tracking remote branch
+
+- `git push origin master` Send changes to the master branch of your remote repository
+- `git push --all origin` Push all branches to your remote repository:
+- `git push origin :<branchname>` Push a branch into your remote repository:
+
+## INSPECT & COMPARE
+
+Examining logs, diffs and object information
+
+- `git log` show the commit history for the currently active branch
+- `git log branchB..branchA` show the commits on branchA that are not on branchB
+- `git log --follow [file]` show the commits that changed file, even across renames
+- `git diff branchB...branchA` show the diff of what is in branchA that is not in branchB
+- `git show [SHA]` show any object in Git in human-readable format
 
 ## Tags
 
-1. `$ git tag 1.0.0 < commitID >` You can use tagging to mark a significant changeset, such as a release. CommitId is the leading characters of the changeset ID, up to 10, but must be unique.
-
-2. `$ git log`  Get the ID using:
-
-3. `$ git push --tags origin` Push all tags to remote repository:
-
-## Connect to a remote repository
-
-### If you haven’t connected your local repository to a remote server, add the server to be able to push to it
-
-```console
-git remote add origin < server >
-```
-
-### List all currently configured remote repositories
-
-```console
-git remote -v
-```
-
-## Update from remote repository
-
-1. `$ git pull` Fetch and merge changes on the remote server to your working directory:
-
-2. `$ git merge < branchname >` To merge a different branch into your active branch:
-
-3. `$ git diff` View all the merge conflicts:
-
-4. `$ git diff --base <filename>` View the conflicts against the base file:
-
-5. `$ git diff < sourcebranch > < targetbranch >` Preview changes, before merging:
-
-6. `$ git add <filename>` After you have manually resolved any conflicts, you mark the changed file
-
-## Check out a repository
-
-- `$ git clone /path/to/repository` Create a working copy of a local repository
-
-- `$ git clone xx@host:/path/to/repository` For a remote server, use:
+1. `git tag 1.0.0 < commitID >` You can use tagging to mark a significant changeset, such as a release. CommitId is the leading characters of the changeset ID, up to 10, but must be unique.
+2. `git log` Get the ID using:
+3. `git push --tags origin` Push all tags to remote repository:
 
 ## Undo local changes
 
-1. `$ git checkout -- <filename>` You can replace the changes in your working tree with:
-
-2. `$ git fetch origin git reset --hard origin/master` To drop all your local changes and commits, fetch the latest history from the server and point your local master branch at it, do this:
-
----
+1. `git checkout -- <filename>` You can replace the changes in your working tree with:
+2. `git fetch origin git reset --hard origin/master` To drop all your local changes and commits, fetch the latest history from the server and point your local master branch at it, do this:
 
 - `git restore index.html` will undo all uncommitted local changes in the specified file. Please be careful because you cannot get these changes back once you've discarded them!
-
-## Make changes
-
-Browse and inspect the evolution of project files
-
-- ```$ git log``` Lists version history for the current branch
-
-- ```$ git log --follow [file]``` Lists version history for a file, beyond renames (works only for a single file)
-
-- ```$ git diff [first-branch]...[second-branch]``` Shows content differences between two branches
-
-- ```$ git show [commit]``` Outputs metadata and content changes of the specified commit
-
-- ```$ git add [file]``` Snapshots the file in preparation for versioning
-
-- ```$ git commit -m "[descriptive message]"``` Records file snapshots permanently in version history
-
-## Synchronize changes
-
-Synchronize your local repository with the remote repository on GitHub.com
-
-- ```$ git fetch``` Downloads all history from the remote tracking branches
-
-- ```$ git merge``` Combines remote tracking branches into current local branch
-
-- ```$ git push``` Uploads all local branch commits to GitHub
-
-- ```$ git pull``` Updates your current local working branch with all new commits from the corresponding remote branch on GitHub. git pull is a combination of git fetch and git merge
 
 ## The .gitignore file
 
 Sometimes it may be a good idea to exclude files from being tracked with Git. This is typically done in a special file named `.gitignore`. You can find helpful templates for `.gitignore` files at [github.com/github/gitignore](https://github.com/github/gitignore).
-
-## Create a new local repository
-
-```console
-git init
-```
-
-## Branches
-
-### rename master to main
-
-```console
-git branch -M main
-```
-
-### 1. Create a new branch and switch to it
-
-```console
-git checkout -b < branchname >
-```
-
-### 2. Switch from one branch to another
-
-```console
-git checkout < branchname >
-```
-
-### 3. List all the branches in your repo, and tell you what branch you’re currently in
-
-```console
-git branch
-```
-
-### 4. Delete the feature branch
-
-```console
-git branch -d < branchname >
-```
-
-### 5. Push all branches to your remote repository
-
-```console
-git push --all origin
-```
-
-### 6. Push a branch into your remote repository
-
-```console
-git push origin :< branchname >
-```
-
-## Add one or more files to staging
-
-```console
-git add < filename > git add *
-```
-
-## Commit
-
-### Commit changes to head
-
-```console
-git commit -m "Commit message"
-```
-
-### Commit any files you’ve added with git add, and also commit any files you’ve changed
-
-```console
-git commit -a -m "message"
-```
-
-## Push
-
-### Send changes to the master branch of your remote repository
-
-```console
-git push origin master
-```
-
-## Tags
-
-### 1. You can use tagging to mark a significant changeset, such as a release
-
-```console
-git tag 1.0.0 < commitID >
-```
-
-### 2. **CommitId** is the leading characters of the changeset ID, up to 10, but must be unique
-
-### Get the ID using
-
-```console
-git log
-
-git log --oneline
-```
-
-### 3. Push all tags to remote repository
-
-```console
-git push --tags origin
-```
-
-## Connect to a remote repository
-
-### If you haven’t connected your local repository to a remote server, add the server to be able to push to it
-
-```console
-git remote add origin < server >
-```
-
-### List all currently configured remote repositories
-
-```console
-git remote -v
-```
-
-## Update from remote repository
-
-### 1. Fetch and merge changes on the remote server to your working directory
-
-```console
-git pull
-```
-
-### 2. To merge a different branch into your active branch
-
-```console
-git merge < branchname >
-```
-
-### 3. View all the merge conflicts
-
-```console
-git diff
-```
-
-### 4. View the conflicts against the base file
-
-```console
-git diff --base < filename >
-```
-
-### 5. Preview changes, before merging
-
-```console
-git diff < sourcebranch > < targetbranch >
-```
-
-### 6. After you have manually resolved any conflicts, you mark the changed file
-
-```console
-git add < filename >
-```
-
-## Check out a repository
-
-### Create a working copy of a local repository
-
-```console
-git clone /path/to/repository <dir_name>
-```
-
-### For a remote server, use
-
-```console
-git clone xx@host:/path/to/repository <dir_name>
-```
-
-## Undo local changes
-
-### 1. You can replace the changes in your working tree with
-
-```console
-git checkout -- < filename >
-```
-
-### 2. To drop all your local changes and commits, fetch the latest history from the server and point your local master branch at it, do this
-
-```console
-git fetch origin git reset --hard origin/master
-```
 
 ## Commands
 
@@ -432,9 +184,7 @@ git fetch origin git reset --hard origin/master
 - Creates a repository and does all of the initial setup.
 - The `.git` directory is the "repository" where git records all of the commits, configuration files and keeps track of everything! _Never directly edit any files inside the .git directory_
 
-```console
-git init
-```
+`git init`
 
 ### **[`git clone`](https://git-scm.com/docs/git-clone)**
 
@@ -446,10 +196,8 @@ git init
 - will create the new repository inside of the current working directory
 - has a number of different transfer protocols you can use. `https://`, `git://`, ssh...
 
-```console
-git clone <path-to-repository>
-git clone <path-to-repository> <new-folder name>
-```
+- `git clone <path-to-repository>`
+- `git clone <path-to-repository> <new-folder name>`
 
 ### **[`git status`](https://git-scm.com/docs/git-status)**
 
@@ -458,9 +206,7 @@ git clone <path-to-repository> <new-folder name>
 - will display information depending on the state of your files, the working directory, and the repository
 - You should always run the git status command. Especially when returning to a project after a period of time.
 
-```console
-git status
-```
+`git status`
 
 ### **[`git log`](https://git-scm.com/docs/git-log)**
 
@@ -468,64 +214,61 @@ git status
 
 - Show logs for all existing commits
 - displays by default: SHA, author, date, commit message
-- **Navigating** The Log:  `one line | half the page | whole page`
+- **Navigating** The Log: `one line | half the page | whole page`
+
   - scroll **down: `↓ o. j, d, f`**
   - scroll **up: `↑ o. k, u, b`**
   - **quit: `q`**
 
-```console
-$ git log # Zeige das ganze Log
-$ git log <sha> # Zeige nur Commit mit passendem sha
-$ git log --grep <text> # Suche nach Commits mit beinhaltetem text
-$ git log --author # Zeige nur commits von diesem Author
-$ git log --oneline # In nur einer Zeile
-$ git log --stat # Zeigt wieviel und welche Dateien wie oft verändert wurden
-$ git log -p|--patch # displays the files and the location of the lines that
-                     # have been modified and the actual changes that have been made
-$ git log --stat -p #  Display the stats info above the patch info
-$ git log -p -w # Ignores all whitespace changes
-```
+- `git log` # Zeige das ganze Log
+- `git log <sha>` # Zeige nur Commit mit passendem sha
+- `git log --grep <text>` # Suche nach Commits mit beinhaltetem text
+- `git log --author` # Zeige nur commits von diesem Author
+- `git log --oneline` # In nur einer Zeile
+- `git log --stat` # Zeigt wieviel und welche Dateien wie oft verändert wurden
+- `git log -p|--patch` # displays the files and the location of the lines that
+  have been modified and the actual changes that have been made
+- `git log --stat -p` # Display the stats info above the patch info
+- `git log -p -w` # Ignores all whitespace changes
 
 ### **[`git show`](https://git-scm.com/docs/git-show)**
 
 - Displays only Info about the given commit
 - [Generating patch text with -p](https://git-scm.com/docs/git-diff#_generating_patch_text_with_p)
 
-```console
-$ git show
-$ git show <sha> # Jump to commit with given sha
-$ git show --stat# Zeigt wieviel und welche Dateien wie oft verändert wurden
-$ git show -p|--patch # displays the files and the location of the lines that
-                      # have been modified and the actual changes that have been made
-$ git show --stat -p # Display the stats info above the patch info
-$ git show -w # Ignores all whitespace changes
-```
+git show
+`git show <sha>` # Jump to commit with given sha
+git show --stat# Zeigt wieviel und welche Dateien wie oft verändert wurden
+`git show -p|--patch` # displays the files and the location of the lines that
+have been modified and the actual changes that have been made
+`git show --stat -p` # Display the stats info above the patch info
+`git show -w` # Ignores all whitespace changes
 
-### **[`$ git diff`](https://git-scm.com/docs/git-diff)**
+### **[`git diff`](https://git-scm.com/docs/git-diff)**
 
 - Show changes that have been made, changes between commits, commit and working tree, etc
 
-```console
+`console
 git diff
-```
+`
 
 ### **[`git add`](https://git-scm.com/docs/git-add)**
 
 - to move files from the Working Directory to the Staging Index (staging)
 
-```bash
+`bash
 git add <file>
 git add <folder/file> <folder/file>`
 git add . # Add all files and nested files
-```
+`
 
 ### **[`git rm`](https://git-scm.com/docs/git-rm)**
 
 - removes files from the Staging Index. (unstage)
 
-```console
+`console
 git rm --cached <file>
-```
+`
 
 ### **[`git commit`](https://git-scm.com/docs/git-commit)**
 
@@ -534,18 +277,18 @@ git rm --cached <file>
 - a commit message must be supplied, lines that start with a `#` are comments and will not be recorded
 - **keep the message short, explain what the commit does**
 
-```console
+`console
 git commit # opens the default editor
 git commit -m "Initial commit" # bypass editor
-```
+`
 
 ### **[`git config`](https://git-scm.com/docs/git-config)**
 
 [Customizing Git - Git Configuration](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration)
 
-```console
+`console
 git config --list  `
-```
+`
 
 ## Terminology
 
@@ -592,12 +335,12 @@ When working with Git, the Working Directory is also different from the command 
 ### Good Commit Messages
 
 - **Do**
-  
+
   - do keep the message short (less than 60-ish characters)
   - do explain what the commit does (not how or why!)
 
 - **Do not**
-  
+
   - do not explain why the changes are made (more on this below)
   - do not explain how the changes are made (that's what git log -p is for!)
   - do not use the word "and" if you have to use "and", your commit message is probably doing too many changes - break the changes into separate commits e.g. "make the background color pink and increase the size of the sidebar"
@@ -615,67 +358,29 @@ This details section of a commit message is included in the `git log`
 
 ### how to create a pull request on a public repo
 
-1. fork the repo on the website
-
-2. git clone your fork to your machine
-
-3. create a new branch on your local clone
-
-   ```console
-   git checkout -b name-of-the-branch
-   ```
-
-4. do your edits
-
-   1. to see your changes
-
-      ```console
-      git status
-      ```
-
-      ```console
-      git diff
-      ```
-
-5. add your files to the staging index
-
-   ```console
-   git add <file>
-   ```
-
-6. commit your changes to the repository
-
-   ```console
-   git commit -m "your message"
-   ```
-
-7. Push the repository to the GitHub
-
-   ```console
-   git push origin 'branch-name'
-   ```
-
-   or:
-
-   ```console
-   git pull-request (?)
-   ```
-
-8. on the github website create the Pull request
+1.  fork the repo on the website
+2.  git clone your fork to your machine
+3.  create a new branch on your local clone
+    `git checkout -b name-of-the-branch`
+4.  do your edits
+    1.  to see your changes
+        `git status`
+        `git diff`
+5.  add your files to the staging index
+    `git add <file>`
+6.  commit your changes to the repository
+    `git commit -m "your message"`
+7.  Push the repository to the GitHub
+    `git push origin 'branch-name'`
+    or:
+    `git pull-request (?)`
+8.  on the github website create the Pull request
 
 ## Tipps
 
 - Nicht zu viel Zeit lassen bis zum Pull request damit sich nciht zu viele changes aufstauen
 - Immer wieder Locales mergen von remotechanges in main oder eigene branches um mit aktueller Version zu arbeiten
 - mit Team absprechen das es pullrequests gab auf main und jeder seinen working branches updated
-
-```console
-git log
-
-git log --oneline
-
-git restore index.html
-```
 
 ## git help
 
