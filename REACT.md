@@ -4,9 +4,18 @@
   - [Best Practice](#best-practice)
   - [Create new Project](#create-new-project)
   - [Modules](#modules)
+    - [exports and imports (`named`, `default`, `named default`)](#exports-and-imports-named-default-named-default)
+  - [UI](#ui)
+    - [Components](#components)
   - [How to pass a parameter to an event handler or callback?](#how-to-pass-a-parameter-to-an-event-handler-or-callback)
   - [UseEffect](#useeffect)
   - [Routing](#routing)
+    - [React Router Dom](#react-router-dom)
+      - [required Package](#required-package)
+      - [in main.jsx](#in-mainjsx)
+      - [in app.jsx](#in-appjsx)
+    - [NavLinks with active status](#navlinks-with-active-status)
+      - [404 Error Pages](#404-error-pages)
   - [Fetching](#fetching)
 
 ## Best Practice
@@ -15,7 +24,7 @@
 
 ## Create new Project
 
-### using Vite
+**using Vite**
 
 1. `npm create vite@latest`
 2. `< enter project settings >`
@@ -29,86 +38,49 @@
 
 ### exports and imports (`named`, `default`, `named default`)
 
-- A default export can be only one in a file or module.
-- But a module can have more than one Named export
-
-```javascript
-import { useState } from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
-import Axios from "./components/Axios"; // default exports dont need {}
-import Quote from "./components/Quote";
-import "./App.css";
-```
-
-#### Named exports
-
-- Once we define a component with the export keyword, we can access and import those exported functions using the import keyword.
-
-```javascript
-//NetData.jsx
-export function Axios() {
-  return <h1>I’m Axios.</h1>;
-}
-
-// or
-
-function Quotes() { ...}
-function Axios() { ...}
-
-export { Quotes, Axios };
-```
-
-#### Named imports
-
-```javascript
-import { Axios, Quote } from ".(NetData";
-```
-
-#### Default exports
-
-- only one element can be exported to another component at a time as a default export. In other words, a file can have only one default export.
-
-```javascript
-// Axios.jsx
-// the function will have the name of the file
-export default function () {
-  return <h1>I’m sending Net Data .</h1>;
-}
-```
-
-#### Default imports
-
-- We do not need to wrap the binding inside the curly braces.
-- Can be given any name as the name of that exported binding.
-
-```javascript
-import MyNAme from “./Axios.jsx”;
-import { Quots, Axios} from “./America.js”;
-```
-
-#### Combined named and default imports
-
+- How you export your component dictates how you must import it.
+- use **named** exports if it exports **multiple components** and values.
+- use **default** exports if the file exports **only one component**
+- When you write a default import, you can put any name you want after import it would still provide you with the same default export.
+- In contrast, with named imports, the name has to match on both sides.
 - The default bindings must come first during importing.
 - The non-default (named) binding must be surrounded by curly braces {…}
+- avoid mixing between default and named exports in a single file
 
-```javascript
-import MyNAme, {Quots, Axios} from “./Axios.jsx”;
-```
+| Syntax        | Export statement                       | Import statement                                  |
+| ------------- | -------------------------------------- | ------------------------------------------------- |
+| Default       | `export default function Button() {}`  | `import Button from './Button.js';`               |
+| Named         | `export function Button() {}`          | `import { Button } from './Button.js';`           |
+| Named Default | `export default function Gallery() {}` | `import Gallery from './Gallery.js';`             |
+|               | `export function Profile() {}`         | `import { Profile } from './Gallery.js';`         |
+|               |                                        | `import Gallery, {Profile} from “./Gallery.jsx”;` |
 
-#### Binding Aiasing
+**Binding Aliasing**
 
 ```javascript
 import AdminLayout from "layouts/Admin/Admin.js";
 // is a shorhand for
 import { default as AdminLayout } from "layouts/Admin/Admin.js";
+export { Admin as AdminDashboard };
 ```
 
-**or**
+## UI
 
-```javascript
-// Admin.js
-export { Admin as AdminLayout };
-```
+### Components
+
+- React applications are built from isolated pieces of UI called components.
+- A React component is a JavaScript function that you can sprinkle with markup
+- You can declare many components in one file
+- React components use a syntax extension called JSX and can display dynamic information
+- JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering logic and content in the same place
+- you can **use curly braces** in your JSX to “open a window” to JavaScript, **to add a logic** or reference a dynamic property inside
+- Every parent component can **pass some information to its child** components by giving them **props**, you can pass any JavaScript value through them, including objects, arrays, functions, and even JSX
+- you can **conditionally** render JSX using JavaScript syntax like if statements, &&, and ? : operators
+- You can use JavaScript’s filter() and map() to filter and transform your array of data into an array of components. For each array item, you will need to specify a unique key.
+- **Keys** let React keep track of each item’s place in the list even if the list changes
+- **React components names must start with a capital letter**
+- **to return multy line markup it must be wraped in parentheses**
+- PERFORMANCE: **never nest Component definitions**, alway define them in the top level
 
 ## How to pass a parameter to an event handler or callback?
 
@@ -194,10 +166,10 @@ return (
     <Routes>
       // Parent for n Route-Coponents
       <Route path="/" element={<Home />} />
-      
+
       //  Can also be
        <Route index element={<Home />} />
-      
+
       <Route path="quotes" element={<Quote />} />
       <Route path="axios" element={<Axios />} />
       <Route
