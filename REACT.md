@@ -7,6 +7,11 @@
     - [exports and imports (`named`, `default`, `named default`)](#exports-and-imports-named-default-named-default)
   - [UI](#ui)
     - [Components](#components)
+    - [JSX](#jsx)
+      - [JavaScript in JSX](#javascript-in-jsx)
+  - [Probs](#probs)
+  - [State](#state)
+    - [react state preservation behavior](#react-state-preservation-behavior)
   - [How to pass a parameter to an event handler or callback?](#how-to-pass-a-parameter-to-an-event-handler-or-callback)
   - [UseEffect](#useeffect)
   - [Routing](#routing)
@@ -32,7 +37,13 @@
 4. `npm i / npm install`
 5. `npm run dev`
 
-- JSX hat replacement Keywords
+**LAN dev server**
+
+- `http://<YOUR_COMPUTER'S_IP>:<YOUR_DEV_SERVER_PORT_NUMBER>`
+- Linux: `hostname -I | awk '{print $1}'`
+- Windows: `ipconfig | findstr IPv4`
+- Start Vite with host option:`npm run dev -- --host`
+- or package.json: `"dev" : "vite --host"`
 
 ## Modules
 
@@ -81,6 +92,59 @@ export { Admin as AdminDashboard };
 - **React components names must start with a capital letter**
 - **to return multy line markup it must be wraped in parentheses**
 - PERFORMANCE: **never nest Component definitions**, alway define them in the top level
+
+### JSX
+
+JSX is a syntax extension for JavaScript that lets you write HTML-like markup inside a JavaScript file
+
+**Rules**
+
+1. Return a single root element, wrap all Elements in a single parent tag.
+   - **[Fragment](https://react.dev/reference/react/Fragment)** let you group elements without an effect on the resulting DOM; it is the same as if the elements were not grouped `<><Child /><Child /></>`
+   - If you want to pass key to a Fragment, you have to explicitly import Fragment from 'react' and render `<Fragment key={yourKey}>...</Fragment>`.
+2. Close all the tags
+3. **camelCase**, many HTML and SVG attributes are written in camelCase, because attributes in JSX become keys of JavaScript objects, `stroke-width -> strokeWidth`
+   - [List of DOM component Prperties and Events](https://react.dev/reference/react-dom/components/common)
+
+#### JavaScript in JSX
+
+- JSX attributes inside single or double quotes are passed as **strings**
+- **Curly braces** let you bring JavaScript logic and variables into your markup, inside the JSX tag content or immediately after = in attributes
+- **double curlies** `{{` and `}}` is a JavaScript object inside JSX curly braces, used for CSS and other objects
+
+```Javascript
+const avatar = 'https://i.imgur.com/7vQD0fPs.jpg';
+const name = 'Gregorio Y. Zara';
+return (
+  <>
+    <h1 className="avatar">{name}'s To Do List</h1>// reference to a variable
+    <img
+      className="avatar" // String
+      src={avatar}       // reference to a variable
+    />
+    <b>{Date.now()}</b>
+  <ul style={{ // Object for CSS
+    backgroundColor: 'black',
+    color: 'pink'
+  }}>
+    <li>Improve the videophone</li>
+   </ul>
+  </>
+);
+```
+
+## Probs
+
+- components use props to communicate with each other
+- you can pass any JavaScript value through them, including objects, arrays, and functions
+- add them to the JSX, just like you would with HTML attributes
+- you can pass any props to your own components
+- use the destructuring syntax `function Avatar({ person, size })` to read them
+-
+
+## State
+
+### [react state preservation behavior](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
 
 ## How to pass a parameter to an event handler or callback?
 
