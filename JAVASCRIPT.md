@@ -14,6 +14,7 @@
   - [Date and Time](#date-and-time)
   - [URL'S](#urls)
   - [Functions](#functions)
+    - [Arrow functions](#arrow-functions)
     - [Anonymous Functions](#anonymous-functions)
     - [Higher Order Functions](#higher-order-functions)
   - [Explicit Function Binding](#explicit-function-binding)
@@ -176,6 +177,11 @@ const plainObject = {
 - Functions are treated as objects in javascript
 - **Function Call: `myFunction()`**
 - **Functiom Reference: `myFunciton`**
+
+### Arrow functions
+
+- Arrow functions implicitly `return` the expression right after `=>`, so you didn’t need a return statemen
+- However, you must write `return` explicitly if your `=>` is followed by a `{` curly brace!
 
 ### Anonymous Functions
 

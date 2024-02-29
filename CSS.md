@@ -10,9 +10,26 @@
   - [Medieaqueries](#medieaqueries)
   - [Nesting](#nesting)
   - [Responsive](#responsive)
+    - [Breakpoints](#breakpoints)
   - [FLEXBOX](#flexbox)
+    - [Container](#container)
+    - [Items](#items)
+      - [Flex Items and Auto-Margins](#flex-items-and-auto-margins)
+    - [CONTAINER CONTROLS](#container-controls)
+    - [ITEM CONTROLS](#item-controls)
   - [RESPONSIVE SITES WITH CSS](#responsive-sites-with-css)
-  - [Flip or Reverse Text Using CSS](#flip-or-reverse-text-using-css)
+    - [HTML Meta Tags](#html-meta-tags)
+    - [CSS Media Queries](#css-media-queries)
+    - [Media Features](#media-features)
+      - [Range Bsp](#range-bsp)
+      - [Dots Per Inch (DPI)](#dots-per-inch-dpi)
+      - [And Operator](#and-operator)
+      - [Comma Separated List](#comma-separated-list)
+  - [How To's](#how-tos)
+    - [Display on Element over another](#display-on-element-over-another)
+    - [Flip or Reverse Text Using CSS](#flip-or-reverse-text-using-css)
+    - [Flipping Text Upside Down](#flipping-text-upside-down)
+    - [Reversing Text](#reversing-text)
 
 ## Specificity
 
@@ -243,8 +260,14 @@ Bestpractis: Mobile First
 
 - `orientation: portrait`
 
+## How To's
 
-## Flip or Reverse Text Using CSS
+### Display on Element over another
+
+1. give the parent element `position: relative;`
+2. give the child element `position top;`
+
+### Flip or Reverse Text Using CSS
 
 As title says, we can Flip Text Upside Down or Reverse Text using CSS only(Rather than some jQuery Plugin or JavaScript). The CSS is completely Cross-browser compatible(Yeah, even older IEs), check out the CSS below.
 
