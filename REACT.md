@@ -11,10 +11,8 @@ Version: `react-dom@18.2.0`
     - [Probs](#probs)
     - [Conditional Rendering](#conditional-rendering)
     - [Rendering Lists](#rendering-lists)
-  - [Interactivity](#interactivity)
+  - [Interactivity - Event Handlers](#interactivity---event-handlers)
   - [State](#state)
-    - [react state preservation behavior](#react-state-preservation-behavior)
-  - [How to pass a parameter to an event handler or callback?](#how-to-pass-a-parameter-to-an-event-handler-or-callback)
   - [UseEffect](#useeffect)
   - [Routing](#routing)
     - [React Router Dom](#react-router-dom)
@@ -24,9 +22,12 @@ Version: `react-dom@18.2.0`
     - [NavLinks with active status](#navlinks-with-active-status)
       - [404 Error Pages](#404-error-pages)
   - [Fetching](#fetching)
-  - [Best Practice](#best-practice)
+  - [Best Practice \& Tipps](#best-practice--tipps)
   - [How To's](#how-tos)
     - [Importing Images](#importing-images)
+    - [How to pass a parameter to an event handler or callback?](#how-to-pass-a-parameter-to-an-event-handler-or-callback)
+    - [Using Array in State](#using-array-in-state)
+    - [Storing information from previous renders](#storing-information-from-previous-renders)
 
 ## Create new Project
 
@@ -244,6 +245,17 @@ export default function List({ people }) {
   const listItems = people.map((person) => <li>{person}</li>);
   return <ul>{listItems}</ul>;
 }
+// or
+const listItems = chemists.map((person) => (
+  <li>
+    <img src={getImageUrl(person)} alt={person.name} />
+    <p>
+      <b>{person.name}:</b>
+      {" " + person.profession + " "}
+      known for {person.accomplishment}
+    </p>
+  </li>
+));
 ```
 
 **Filtering arrays of items**
@@ -266,7 +278,7 @@ const chemists = people.filter((person) => person.profession === "chemist");
 - **PITFALL**: Array index as a key often leads to subtle and confusing bugs, default behavior if no key is specified
 - **PITFALL**, **PERFORMANCE**: do not generate keys on the fly, e.g. with `key={Math.random()}` causes keys to never match up between renders, leading to all your components and DOM being recreated every time and loss of user input
 
-## Interactivity
+## Interactivity - Event Handlers
 
 - Event handlers are the best place for side effects
 
@@ -308,38 +320,68 @@ const chemists = people.filter((person) => person.profession === "chemist");
   {children}
 </button>
 ```
+
 - In rare cases, you might need to catch all events on child elements, you can do this by adding `onClickCapture={() => {...}}>` to the parent (usefull for click analytics)
-- 
-**Preventing default behavior**
+- **Preventing default behavior**
 
 - For example some browser events have default behavior when a button inside a `<form>` is clicked, they will reload the whole page. You can call `e.preventDefault()` on the event object to stop this from happening:
 
-
 ## State
 
-### [react state preservation behavior](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
+- **[useState](https://react.dev/reference/react/useState#setstate) - Function**
+- State is local to a component instance on the screen, each component copy will have completely isolated state
+- Local variables don’t persist between renders and changes to local variables won’t trigger renders
+- Use a state variable when a component needs to “remember” information between renders.
+- State variables are declared by calling the useState Hook.`import { useState } from 'react';`
+- The `useState` Hook returns a pair of values: the current state and the function to update it: `const [index, setIndex] = useState(0);` (Array destructuring)
+- You can have more than one state variable. Internally, React matches them up by their order (stored in an array).
+- In React, state is considered **read-only**, so you should **replace** it **rather** than **mutate** your existing objects `setForm({...form,firstName: 'Taylor'});`
+- Hooks are special functions that start with use. They let you “hook into” React features like state.
+- **PITFALL**: Hooks can **only be called at the top level** of your components or your own Hooks, need to be called unconditionally
+- State is private to the component. If you render it in two places, each copy gets its own state.
+- **Convention** is to name this pair like const `[something, setSomething]`
+- [react state preservation behavior](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
+- The `set` function only updates the state variable for the next render. If you read the state variable after calling the set function, you will still get the old value that was on the screen before your call.
+- Variables and event handlers don’t “survive” re-renders. Every render has its own event handlers.
+- Calling the `set` function during rendering is only allowed from within the currently rendering component.
+- If you do multiple updates within the same event, an updater function can be helpful `setAge(a => a + 1);`
+- **PITFALL** Calling the set function does not change the current state in the currently executing code
+- **React keeps the state values “fixed” within one render’s event handlers**
+- If the new value you provide is identical to the current `state` React will skip re-rendering the component and its children.
+- **Convention**: It’s common to name the updater function argument by the first letters of the corresponding state variable
+- **React batches state updates**. It updates the screen after all the event handlers have run and have called their `set` functions. Use `flushSync` to force rerender
+- **NOTE**: If you call a set function while rendering, it must be inside a condition -
+  ```javascript
+  if (prevCount !== count) setPrevCount(count);
+  ```
 
-## How to pass a parameter to an event handler or callback?
+**Storing a Function**
 
-You can use an arrow function to wrap around an event handler and pass parameters:
-
-```jsx
-<button onClick={() => this.handleClick(id)} />
+```javascript
+const [fn, setFn] = useState(() => someFunction);
+const [index, setIndex] = useState(0); // Storing Data
 ```
 
-This is an equivalent to calling .bind:
+**Initializer function**
 
-```jsx
-<button onClick={this.handleClick.bind(this, id)} />
+```javascript
+const [todos, setTodos] = useState(createInitialTodos);
 ```
 
-Apart from these two approaches, you can also pass arguments to a function which is defined as arrow function
+**Setter functions**
 
-```jsx
-<button onClick={this.handleClick(id)} />;
-handleClick = (id) => () => {
-  console.log("Hello, your ticket number is", id);
-};
+```javascript
+const [todos, setTodos] = useState(createInitialTodos());
+
+// 🚩 Mistake: mutating state
+setTodos((prevTodos) => {
+  prevTodos.push(createTodo());
+});
+
+// ✅ Correct: replacing with new state
+setTodos((prevTodos) => {
+  return [...prevTodos, createTodo()];
+});
 ```
 
 ## UseEffect
@@ -483,7 +525,7 @@ useEffect(() => {
 }, [param]);
 ```
 
-## Best Practice
+## Best Practice & Tipps
 
 - It's good practice to put everything that can go outside of a component outside of it
 - When possible, try to express your logic with rendering alone
@@ -498,7 +540,8 @@ useEffect(() => {
 - Components should only return their JSX, and **not change any objects** or variables that existed before rendering
 - Each component should calculate JSX on their own and **not** attempt to coordinate with or depend upon others **during rendering**
 - Use **Strict Mode** in which React calls each component’s function twice during development. to find mistakes in your components, it has has no effect in production
-- Event handlers are the best place for side effects
+- React will never call your event handlers twice they are the best place for side effects
+- Strive to express your component’s logic in the JSX you return. When you need to “change things”, you’ll usually want side effects in an event handler thats defined inside your component, but does not run during rendering. As a last resort, you can `useEffect`
 
 **Performance with pure functions**
 
@@ -506,11 +549,16 @@ useEffect(() => {
   - `memo` lets you skip re-rendering a component when its props are unchanged. If the sam e inpute produces the same output
 - Rendering can happen at any time, so components should not depend on each others’ rendering sequence. If there are no Sideeffects React can restart rendering without wasting time to finish the outdated render
 
-**Where you can cause side effects**
+**Render and Commit**
 
-- Strive to express your component’s logic in the JSX you return. When you need to “change things”, you’ll usually want side effects in an event handler thats defined inside your component, but does not run during rendering. As a last resort, you can `useEffect`
+- Any screen update in a React app happens in three steps:
+  - Trigger
+  - Render
+  - Commit
+- You can use Strict Mode to find mistakes in your components
+- React does not touch the DOM if the rendering result is the same as last time
 
-##  How To's
+## How To's
 
 ### Importing Images
 
@@ -524,6 +572,120 @@ export default function ContactCard() {
     <div className="ContactCard">
       <img src={defaultAvatar} alt="" />
     </div>
+  );
+}
+```
+
+### How to pass a parameter to an event handler or callback?
+
+You can use an arrow function to wrap around an event handler and pass parameters:
+
+```jsx
+<button onClick={() => this.handleClick(id)} />
+```
+
+This is an equivalent to calling .bind:
+
+```jsx
+<button onClick={this.handleClick.bind(this, id)} />
+```
+
+Apart from these two approaches, you can also pass arguments to a function which is defined as arrow function
+
+```jsx
+<button onClick={this.handleClick(id)} />;
+handleClick = (id) => () => {
+  console.log("Hello, your ticket number is", id);
+};
+```
+
+### Using Array in State
+
+```javascript
+import { useState } from "react";
+import AddTodo from "./AddTodo.js";
+import TaskList from "./TaskList.js";
+
+let nextId = 3;
+const initialTodos = [
+  { id: 0, title: "Buy milk", done: true },
+  { id: 1, title: "Eat tacos", done: false },
+  { id: 2, title: "Brew tea", done: false },
+];
+
+export default function TaskApp() {
+  const [todos, setTodos] = useState(initialTodos);
+
+  function handleAddTodo(title) {
+    setTodos([
+      ...todos,
+      {
+        id: nextId++,
+        title: title,
+        done: false,
+      },
+    ]);
+  }
+
+  function handleChangeTodo(nextTodo) {
+    setTodos(
+      todos.map((t) => {
+        if (t.id === nextTodo.id) {
+          return nextTodo;
+        } else {
+          return t;
+        }
+      })
+    );
+  }
+
+  function handleDeleteTodo(todoId) {
+    setTodos(todos.filter((t) => t.id !== todoId));
+  }
+
+  return (
+    <>
+      <AddTodo onAddTodo={handleAddTodo} />
+      <TaskList
+        todos={todos}
+        onChangeTodo={handleChangeTodo}
+        onDeleteTodo={handleDeleteTodo}
+      />
+    </>
+  );
+}
+``;
+```
+
+### [Storing information from previous renders](https://react.dev/reference/react/useState#storing-information-from-previous-renders)
+
+```javascript
+import { useState } from "react";
+import CountLabel from "./CountLabel.js";
+
+export default function App() {
+  const [count, setCount] = useState(0);
+  return (
+    <>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+      <CountLabel count={count} />
+    </>
+  );
+}
+
+function CountLabel({ count }) {
+  const [prevCount, setPrevCount] = useState(count);
+  const [trend, setTrend] = useState(null);
+  if (prevCount !== count) {
+    setPrevCount(count);
+    setTrend(count > prevCount ? "increasing" : "decreasing");
+  }
+  return (
+    <>
+      <h1>{count}</h1>
+      {trend && <p>The count is {trend}</p>}
+    </>
   );
 }
 ```
