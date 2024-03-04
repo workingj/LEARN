@@ -25,3 +25,12 @@ pre{
 	border: 2px ridge #ddd;
 	/* background-color: #ddd; */
 }
+
+strong{
+	text-decoration: underline;
+	margin-top: 2em;
+}
+li > strong{
+	text-decoration: none;
+	margin-top: 0;
+}
