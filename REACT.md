@@ -11,8 +11,8 @@ Version: `react-dom@18.2.0`
     - [Probs](#probs)
     - [Conditional Rendering](#conditional-rendering)
     - [Rendering Lists](#rendering-lists)
-  - [Interactivity - Event Handlers](#interactivity---event-handlers)
-  - [State](#state)
+  - [Event Handlers and Interactivity](#event-handlers-and-interactivity)
+  - [State and the **`useState`** Hook](#state-and-the-usestate-hook)
   - [UseEffect](#useeffect)
   - [Routing](#routing)
     - [React Router Dom](#react-router-dom)
@@ -278,7 +278,7 @@ const chemists = people.filter((person) => person.profession === "chemist");
 - **PITFALL**: Array index as a key often leads to subtle and confusing bugs, default behavior if no key is specified
 - **PITFALL**, **PERFORMANCE**: do not generate keys on the fly, e.g. with `key={Math.random()}` causes keys to never match up between renders, leading to all your components and DOM being recreated every time and loss of user input
 
-## Interactivity - Event Handlers
+## Event Handlers and Interactivity
 
 - Event handlers are the best place for side effects
 
@@ -326,30 +326,33 @@ const chemists = people.filter((person) => person.profession === "chemist");
 
 - For example some browser events have default behavior when a button inside a `<form>` is clicked, they will reload the whole page. You can call `e.preventDefault()` on the event object to stop this from happening:
 
-## State
+## State and the **[`useState`](https://react.dev/reference/react/useState#setstate)** Hook
 
-- **[useState](https://react.dev/reference/react/useState#setstate) - Function**
-- State is local to a component instance on the screen, each component copy will have completely isolated state
-- Local variables don’t persist between renders and changes to local variables won’t trigger renders
+- State is private to the component. If you render it in two places, each copy gets its own state.
+- Local variables and event handlers don’t persist re-renders. **Every render has its own event handlers and local variables** and changes to local variables won’t trigger re-renders
+- **React keeps the state values “fixed” within one render’s event handlers**
 - Use a state variable when a component needs to “remember” information between renders.
+- [react state preservation behavior](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
+
+---
+
 - State variables are declared by calling the useState Hook.`import { useState } from 'react';`
-- The `useState` Hook returns a pair of values: the current state and the function to update it: `const [index, setIndex] = useState(0);` (Array destructuring)
-- You can have more than one state variable. Internally, React matches them up by their order (stored in an array).
-- In React, state is considered **read-only**, so you should **replace** it **rather** than **mutate** your existing objects `setForm({...form,firstName: 'Taylor'});`
+- The returns a pair of values: the current state and the function to update it: `const [index, setIndex] = useState(0);` (Array destructuring)
+- **Convention** is to name this pair like const `[something, setSomething]`
 - Hooks are special functions that start with use. They let you “hook into” React features like state.
 - **PITFALL**: Hooks can **only be called at the top level** of your components or your own Hooks, need to be called unconditionally
-- State is private to the component. If you render it in two places, each copy gets its own state.
-- **Convention** is to name this pair like const `[something, setSomething]`
-- [react state preservation behavior](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
+- You can have more than one state variable. Internally, React matches them up by their order (stored in an array).
+
+---
+
 - The `set` function only updates the state variable for the next render. If you read the state variable after calling the set function, you will still get the old value that was on the screen before your call.
-- Variables and event handlers don’t “survive” re-renders. Every render has its own event handlers.
-- Calling the `set` function during rendering is only allowed from within the currently rendering component.
+- **PITFALL** Calling the `set` function does not change the current state in the currently executing code
 - If you do multiple updates within the same event, an updater function can be helpful `setAge(a => a + 1);`
-- **PITFALL** Calling the set function does not change the current state in the currently executing code
-- **React keeps the state values “fixed” within one render’s event handlers**
-- If the new value you provide is identical to the current `state` React will skip re-rendering the component and its children.
 - **Convention**: It’s common to name the updater function argument by the first letters of the corresponding state variable
+- If the new value you provide is identical to the current `state` React will skip re-rendering the component and its children.
+- In React, state is considered **read-only**, so you should **replace** it **rather** than **mutate** your existing objects `setForm({...form,firstName: 'Taylor'});`
 - **React batches state updates**. It updates the screen after all the event handlers have run and have called their `set` functions. Use `flushSync` to force rerender
+- Calling the `set` function during rendering is only allowed from within the currently rendering component.
 - **NOTE**: If you call a set function while rendering, it must be inside a condition -
   ```javascript
   if (prevCount !== count) setPrevCount(count);

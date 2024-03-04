@@ -30,7 +30,7 @@ strong{
 	text-decoration: underline;
 	margin-top: 2em;
 }
-li > strong{
+li > strong, h2 > strong{
 	text-decoration: none;
 	margin-top: 0;
 }
