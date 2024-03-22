@@ -151,10 +151,11 @@ Auch als Laufzeitumgebung oder Container bezeichnete Softwareschicht, die das Be
 - Aufteilen des Hauptspeichers in Bereiche mit unterschiedlichen Sicherheitskonzepten
 - Sicherheitsdienste wie: Authentifizeirung (Kennung und Passwort), Authorisierung (Zugriffsrechte), Vertraulichkeit (Abhörsicher, Verschlüsselt), Integrität (nicht manipulierte Daten)
 - Verfügbarkeit durch Cluster-isierung
+- Bereitstellen von Diensten
 
 #### Cluster
 
-Eine Reihe von Hardware und Software Replikaten die nach Außen als Einheit auftreten
+Eine Reihe von Hard- und Software-Replikaten die nach Außen als Einheit auftreten
 
 **fail-over Cluster**: Zur Ausfallvermeidung, springen nur bei Komponenten Ausfall ein
   - Tranparenter Wechsel möglich durch **Hot-Stand-By**
@@ -162,3 +163,23 @@ Eine Reihe von Hardware und Software Replikaten die nach Außen als Einheit auft
 
 **load-balancing Cluster**: Zur Lastenverteilung, erhöhen Parallelität durch immer aktive Replikate
 
+#### Dienste
+
+Anwendungsorientierte Middelware bietet ihere Dienste impliziet über die Laufzeitumgebung an
+Bieten Anwendungen klar definierte technische Funktionalität über Schnittstellen an, die bei bedarf genutzt werden können
+
+- sind Anwendungs unabhängig, können beliebig viele sein
+- Namensdienst zur Namensauflösung von Ressourcen (DNS) zb. Druckerzugang
+- Sitzungsdienst (RAM intensiv bei vielen Benutzern)
+- Transaktionsdienste für Multi-User CRUD-Operationen
+
+#### Transaktionen
+
+- Ermöglichen Datenkonsistenz trotz paralleler Zugriffe, 
+- sie umfassen eine Reihe atomarer Aktionen für deren durchführung die gleichen Eigenschaften gelten
+- z.B.: Drukerwarteschlangen, Datenbanken, Nachrichtenwarteschlangen
+- Sie besitzen die **ACID** Eigenschaften
+  - Atomarität/Atomicity: "Alles oder nichts" Alle aktionen werden Ausgeführt oder keine
+  - Konsitenz/Consistency: Eine Transaktion bringt einen konsistenten Zustand immer einen neuen konsistenten Zustand
+  - Isolation: Transaktion sind von einander isoliert und stören sich nicht gegenseitig
+  - Dauerhaft/Durability: Der Zustand am Ende einer Transaktion wird dauerhaft festgeschrieben
