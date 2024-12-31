@@ -140,10 +140,21 @@ add(MY_VALUE, 5);
 ## Date and Time
 
 ```javascript
+// Get Time
 let now = new Date();
 
 console.log(now.getHours() + ":" + now.getMinutes());
 console.log(now.getDate() + "." + now.getMonth());
+
+// Date
+var date = new Date();
+console.log(date);
+console.log(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`);
+console.log(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
+
+// UNIX Timestamp
+Date.now(); // 1735499959142
+Math.floor(Date.now() / 1000); // 173549995
 ```
 
 ## URL'S
@@ -382,11 +393,3 @@ const myFetchFunctionAsync = async () => {
 ### Fetch Sending
 
 
-## Date & Time
-
-```javascript
-var date = new Date();
-console.log(date);
-console.log(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`);
-console.log(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
-```
