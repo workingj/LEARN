@@ -2,54 +2,20 @@
 
 - [PHP](#php)
   - [Setup](#setup)
-    - [php.ini-Direktiven des Sprachkerns](#phpini-direktiven-des-sprachkerns)
   - [Error Reporting](#error-reporting)
   - [PHP-TAG](#php-tag)
   - [Ausdrücke](#ausdrücke)
   - [Operatoren](#operatoren)
-    - [Ternärer Operator `?:`](#ternärer-operator-)
-    - [?? - Coalescence Operator](#---coalescence-operator)
-    - [OR](#or)
-    - [Inkrement und Dekrement](#inkrement-und-dekrement)
-    - [Vergleichsoperatoren](#vergleichsoperatoren)
   - [Typsystem](#typsystem)
-    - [Runden](#runden)
-    - [Weak Typing](#weak-typing)
-    - [Typumwandlung (Typen-Jonglage)](#typumwandlung-typen-jonglage)
-    - [Type Casting](#type-casting)
-    - [Typenvergleich](#typenvergleich)
   - [include und require](#include-und-require)
   - [Variablen](#variablen)
-    - [Referencen](#referencen)
-    - [Vordefinierte Variablen](#vordefinierte-variablen)
-    - [Variablen aus externen Quellen (HTML-Formulare)](#variablen-aus-externen-quellen-html-formulare)
-    - [Geltungsbereich von Variablen](#geltungsbereich-von-variablen)
-    - [Vardump to String](#vardump-to-string)
   - [Datentypen](#datentypen)
-    - [Booleans](#booleans)
-    - [Strings](#strings)
-    - [Arrays](#arrays)
-      - [Assoziative Arrays](#assoziative-arrays)
-      - [Foreach und Arrays](#foreach-und-arrays)
-      - [Array Destrukturierung](#array-destrukturierung)
-    - [Konstanten](#konstanten)
-    - [Compile-time constants](#compile-time-constants)
   - [Kontrolltrukturen / Verzweigungen](#kontrolltrukturen--verzweigungen)
   - [Funktionen](#funktionen)
   - [Anonyme Funktionen - Closures](#anonyme-funktionen---closures)
   - [Objektorientierung](#objektorientierung)
-    - [OOP - Klassen](#oop---klassen)
-    - [OOP - Interfaces](#oop---interfaces)
-    - [OOP - Vererbung](#oop---vererbung)
-    - [OOP - Abstract Classes](#oop---abstract-classes)
-    - [OOP - Statische Funktionen](#oop---statische-funktionen)
-    - [OOP - Magic Methodes](#oop---magic-methodes)
-    - [OOP - Konstanten](#oop---konstanten)
-    - [OOP - Static](#oop---static)
-    - [OOP - Singelton Pattern](#oop---singelton-pattern)
   - [Namespaces](#namespaces)
   - [Autoloading](#autoloading)
-    - [PSR-4 (PHP Standard Recommentation) Improved Autoloading](#psr-4-php-standard-recommentation-improved-autoloading)
   - [Exceptions](#exceptions)
   - [Output Kontrolle](#output-kontrolle)
   - [HTTP QUERIES](#http-queries)
@@ -57,30 +23,13 @@
   - [SESSIONS](#sessions)
   - [COOKIES](#cookies)
   - [MySQL und PDO](#mysql-und-pdo)
-    - [PDO - PHP Data Object](#pdo---php-data-object)
-    - [PDO - Fetch in to Class](#pdo---fetch-in-to-class)
-    - [MYSQL - Storage Engines](#mysql---storage-engines)
-    - [MYSQL - InnoDB - Tranaktionen](#mysql---innodb---tranaktionen)
   - [Sicherheit](#sicherheit)
-    - [Sicherheit bei Formularen](#sicherheit-bei-formularen)
-    - [Sicherheit bei Nutzereingaben](#sicherheit-bei-nutzereingaben)
-    - [Passwortsicherheit](#passwortsicherheit)
-    - [SQL-Sicherheit](#sql-sicherheit)
   - [BestPractice](#bestpractice)
-    - [Code Strucktur](#code-strucktur)
-    - [MCV - Pattern](#mcv---pattern)
   - [Examples](#examples)
-    - [Time](#time)
-    - [Ordner auslesen](#ordner-auslesen)
-    - [PHP Formulare](#php-formulare)
-    - [GET - Formular](#get---formular)
-    - [POST - Formular](#post---formular)
-    - [Render Funktion](#render-funktion)
-    - [Container - Pattern](#container---pattern)
   - [Reguläre Ausdrücke](#reguläre-ausdrücke)
   - [.htaccess](#htaccess)
-    - [**Fehlerseite Konfigurieren**](#fehlerseite-konfigurieren)
   - [Berechtigungen unter Linux](#berechtigungen-unter-linux)
+
 
 ## Setup
 
@@ -483,6 +432,34 @@ ob_start();
 var_dump($someVar);
 $str = ob_get_clean();
 ```
+
+### Isset vs Empty vs Is_null
+
+- [isset()](https://www.php.net/manual/en/function.isset.php) is to check if a variable is set with a value and that value should not be null.
+- [empty()](https://www.php.net/manual/en/function.empty.php) is to check if a given variable is empty. The difference with isset() is, isset has null check.
+- [is-null()](https://www.php.net/manual/en/function.is-null.php) is to check whether a variable is defined as null.
+
+#### Truth table
+
+|         | “”    | “apple” | NULL  | FALSE | 0     | undefined      | TRUE  | array() | 123   |
+| ------- | ----- | ------- | ----- | ----- | ----- | -------------- | ----- | ------- | ----- |
+| isset   | TRUE  | TRUE    | FALSE | TRUE  | TRUE  | FALSE          | TRUE  | TRUE    | TRUE  |
+| empty   | TRUE  | FALSE   | TRUE  | TRUE  | TRUE  | TRUE           | FALSE | TRUE    | FALSE |
+| is_null | FALSE | FALSE   | TRUE  | FALSE | FALSE | Warning / TRUE | FALSE | FALSE   | FALSE |
+
+#### Differences table
+
+| Value of $var           | isset | empty | is_null      |
+| ----------------------- | ----- | ----- | ------------ |
+| “” (empty string)       | true  | true  | false        |
+| ‘apple’ (string value)  | true  | false | false        |
+| null (declaration-only) | false | true  | true         |
+| FALSE                   | true  | true  | false        |
+| 0                       | true  | true  | false        |
+| undefined  variable     | false | true  | Warning/true |
+| TRUE                    | true  | false | false        |
+| array() (empty array)   | true  | true  | false        |
+| 123 (numeric value)     | true  | false | false        |
 
 ## Datentypen
 
