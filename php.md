@@ -451,15 +451,15 @@ $str = ob_get_clean();
 
 | Value of $var           | isset | empty | is_null      |
 | ----------------------- | ----- | ----- | ------------ |
-| “” (empty string)       | true  | true  | false        |
-| ‘apple’ (string value)  | true  | false | false        |
-| null (declaration-only) | false | true  | true         |
-| FALSE                   | true  | true  | false        |
-| 0                       | true  | true  | false        |
-| undefined  variable     | false | true  | Warning/true |
-| TRUE                    | true  | false | false        |
-| array() (empty array)   | true  | true  | false        |
-| 123 (numeric value)     | true  | false | false        |
+| “” (empty string)       | TRUE  | TRUE  | FALSE        |
+| ‘apple’ (string value)  | TRUE  | FALSE | FALSE        |
+| null (declaration-only) | FALSE | TRUE  | TRUE         |
+| FALSE                   | TRUE  | TRUE  | FALSE        |
+| 0                       | TRUE  | TRUE  | FALSE        |
+| undefined  variable     | FALSE | TRUE  | WARNING/TRUE |
+| TRUE                    | TRUE  | FALSE | FALSE        |
+| array() (empty array)   | TRUE  | TRUE  | FALSE        |
+| 123 (numeric value)     | TRUE  | FALSE | FALSE        |
 
 ## Datentypen
 
