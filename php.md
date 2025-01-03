@@ -2,20 +2,59 @@
 
 - [PHP](#php)
   - [Setup](#setup)
+    - [php.ini-Direktiven des Sprachkerns](#phpini-direktiven-des-sprachkerns)
   - [Error Reporting](#error-reporting)
   - [PHP-TAG](#php-tag)
+  - [Ausführung](#ausführung)
   - [Ausdrücke](#ausdrücke)
   - [Operatoren](#operatoren)
+    - [Ternärer Operator `?:`](#ternärer-operator-)
+    - [?? - Coalescence Operator](#---coalescence-operator)
+    - [OR](#or)
+    - [Inkrement und Dekrement](#inkrement-und-dekrement)
+    - [Vergleichsoperatoren](#vergleichsoperatoren)
   - [Typsystem](#typsystem)
+    - [Runden](#runden)
+    - [Weak Typing](#weak-typing)
+    - [Typumwandlung (Typen-Jonglage)](#typumwandlung-typen-jonglage)
+    - [Type Casting](#type-casting)
+    - [Typenvergleich](#typenvergleich)
   - [include und require](#include-und-require)
   - [Variablen](#variablen)
+    - [Referencen](#referencen)
+    - [Vordefinierte Variablen](#vordefinierte-variablen)
+    - [Variablen aus externen Quellen (HTML-Formulare)](#variablen-aus-externen-quellen-html-formulare)
+    - [Geltungsbereich von Variablen](#geltungsbereich-von-variablen)
+    - [Vardump to String](#vardump-to-string)
+    - [Isset vs Empty vs Is\_null](#isset-vs-empty-vs-is_null)
+      - [Truth table](#truth-table)
+      - [Differences table](#differences-table)
   - [Datentypen](#datentypen)
+    - [Booleans](#booleans)
+    - [Strings](#strings)
+    - [Arrays](#arrays)
+      - [Assoziative Arrays](#assoziative-arrays)
+      - [Foreach und Arrays](#foreach-und-arrays)
+      - [Array Destrukturierung](#array-destrukturierung)
+    - [Konstanten](#konstanten)
+    - [Compile-time constants](#compile-time-constants)
   - [Kontrolltrukturen / Verzweigungen](#kontrolltrukturen--verzweigungen)
   - [Funktionen](#funktionen)
   - [Anonyme Funktionen - Closures](#anonyme-funktionen---closures)
   - [Objektorientierung](#objektorientierung)
+    - [public, protected, private](#public-protected-private)
+    - [OOP - Klassen](#oop---klassen)
+    - [OOP - Interfaces](#oop---interfaces)
+    - [OOP - Vererbung](#oop---vererbung)
+    - [OOP - Abstract Classes](#oop---abstract-classes)
+    - [OOP - Statische Funktionen](#oop---statische-funktionen)
+    - [OOP - Magic Methodes](#oop---magic-methodes)
+    - [OOP - Konstanten](#oop---konstanten)
+    - [OOP - Static](#oop---static)
+    - [OOP - Singelton Pattern](#oop---singelton-pattern)
   - [Namespaces](#namespaces)
   - [Autoloading](#autoloading)
+    - [PSR-4 (PHP Standard Recommentation) Improved Autoloading](#psr-4-php-standard-recommentation-improved-autoloading)
   - [Exceptions](#exceptions)
   - [Output Kontrolle](#output-kontrolle)
   - [HTTP QUERIES](#http-queries)
@@ -23,13 +62,33 @@
   - [SESSIONS](#sessions)
   - [COOKIES](#cookies)
   - [MySQL und PDO](#mysql-und-pdo)
+    - [PDO - PHP Data Object](#pdo---php-data-object)
+    - [PDO - Fetch in to Class](#pdo---fetch-in-to-class)
+    - [MYSQL - Storage Engines](#mysql---storage-engines)
+    - [MYSQL - InnoDB - Tranaktionen](#mysql---innodb---tranaktionen)
   - [Sicherheit](#sicherheit)
+    - [Sicherheit bei Formularen](#sicherheit-bei-formularen)
+    - [Sicherheit bei Nutzereingaben](#sicherheit-bei-nutzereingaben)
+    - [Passwortsicherheit](#passwortsicherheit)
+    - [SQL-Sicherheit](#sql-sicherheit)
   - [BestPractice](#bestpractice)
+    - [Code Strucktur](#code-strucktur)
+    - [MCV - Pattern](#mcv---pattern)
   - [Examples](#examples)
+    - [Time](#time)
+    - [Ordner auslesen](#ordner-auslesen)
+    - [PHP Formulare](#php-formulare)
+    - [GET - Formular](#get---formular)
+    - [POST - Formular](#post---formular)
+    - [Render Funktion](#render-funktion)
+    - [Container - Pattern](#container---pattern)
   - [Reguläre Ausdrücke](#reguläre-ausdrücke)
   - [.htaccess](#htaccess)
+    - [**Fehlerseite Konfigurieren**](#fehlerseite-konfigurieren)
   - [Berechtigungen unter Linux](#berechtigungen-unter-linux)
-
+    - [Complete Tables](#complete-tables)
+    - [Default Permissions](#default-permissions)
+    - [How to change permissions for a folder and its subfolders/files](#how-to-change-permissions-for-a-folder-and-its-subfoldersfiles)
 
 ## Setup
 
@@ -122,6 +181,11 @@ $bgColor = 'red';
 - Wenn eine Datei nur PHP-Code enthält, ist es besser, den schließenden PHP-Tag am Ende der Datei wegzulassen. Dies verhindert, versehentliche ausgaben da php an dieser stelle mit der ausgabe beginnt.
 - Wenn PHP in XML oder XHTML eingebettet wird, müssen die normalen `<?php ?>`-PHP-Tags verwenden werden, um die Standards einzuhalten.
 - Für die Ausgabe von großen Textblöcken ist der Ausstieg aus dem Parse-Modus generell effizienter, als den gesamten Text durch echo oder print zu jagen
+
+## Ausführung
+
+- [`eval()`](https://www.php.net/manual/de/function.eval.php) Sprach Konstrukt das gegebenen Code auswertet und bei return mit null oder gegebenem Wert zurück kehrt
+- ein loses returnstatement in einem script, beendet einen script und kann einen variable über include zurückgeben
 
 ## Ausdrücke
 
@@ -246,7 +310,8 @@ $var = 3 / 2  = 0,6666 // ungleiche teilung wird zu float
 - geht bei Pfadsuche immer von der Einstigs Datei aus
 - **include, & include_once** warnt wenn Datei nicht vorhanden
 - **require, & require_once** bricht ausführung ab wenn nicht vorhanden
-
+- require kann return values haben, die man in variablen speichern kann, dafür müss man in der angeforderten Datie die Variablen am Ende returnen
+- 
 ```php
 include __DIR__ ."/f.php";
 include __DIR__ . DIRECTORY_SEPARATOR . "b.php";
@@ -724,7 +789,7 @@ function f() {
     execute(function() use($name) {
     // execute(function() { # Undefined variable $name
         var_dump($name);
-        var_dump("Funktion wird ausgefÃ¼hrt");
+        var_dump("Funktion wird ausgeführt");
     });
 }
 f();
@@ -739,7 +804,15 @@ f();
 - `get_class()` Ermittelt die Klasse eines Objekts
 - geht auch mit return values
 
+### public, protected, private
+
+- **public** can be accessed everywhere.
+- **protected** can be accessed only within the class itself and by inheriting and parent classes. 
+- **private** may only be accessed by the class that defines the member.
+
 ### OOP - Klassen
+
+- Klassennamen ausgeben mit `PagesModel::class`
 
 ```php
  class BankAccount
@@ -1027,6 +1100,12 @@ ImageHelper::resizeImage("........", ImageHelper::QUALITY_MEDIUM);
 ```
 
 ### OOP - Static
+
+- Eine statische Variable existiert nur in einem lokalen Funktions-Geltungsbereich, der Wert geht beim Verlassen dieses Bereichs aber nicht verloren.
+- Klasseneigenschaften oder -methoden als statisch zu deklarieren, macht diese zugänglich, ohne dass man die Klasse instantiieren muss.
+- Auch innerhalb eines instantiierten Klassenobjekts kann statisch auf sie zugegriffen werden. 
+- Anonyme Funktionen können statisch deklariert werden. Dies verhindert, dass die aktuelle Klasse automatisch an sie gebunden wird. Objekte können zur Laufzeit ebenfalls nicht an sie gebunden werden.
+- `$this` ist nicht in statischen Methoden verfürbar
 
 ```php
 class Image {
@@ -1674,6 +1753,7 @@ class Container {
 ## Reguläre Ausdrücke
 
 - [Reguläre Ausdrücke - PCRE (Perl Compatible Regular Expression)](https://www.php.net/manual/de/book.pcre.php)
+- [Niederschrift zu Regex](./regex.md)
 
 ```php
 # CHARACTER CLASSES
@@ -1821,31 +1901,33 @@ $email = preg_replace('/([a-zA-Z0-9]+)(\+\w+)\@/', '$1@', $email);
 - Nur wenn Apache der HTTPD ist, kein NGINX
 - htaccess-Datein in Apache erlauben
 - ErrorDocument muss in Apache erlaubt sein
-
 - [.htaccess-Book](https://htaccessbook.com/commenting-your-htaccess-code/)
 
 ### **Fehlerseite Konfigurieren**
 
-```text
+```apache
 # Pfadangabe muss absolut zum Document root sein
 ErrorDocument 404 /12-wissen/error.php
 ```
 
 ## Berechtigungen unter Linux
 
-Chmode
+- **siehe auch umask & `umask()`**
+Note that if the first digit is zero, it is not displayed. For example, if umask is set to `022`, `22` is displayed.
+
+**chmode**
 
 - Ein datei gehört eineme Benutzer und einer Gruppe
 - Berechtigungen auf 3 Ebene
   - Benutzer
   - Gruppe
-  - alle Anderen
+  - alle Anderen (Welt)
 
  **Berechtigung**
 
 - `1` Ausführechte
 - `2` Datei / Ordner ist schreibbar
-- `4` Die Datei ist lesbar
+- `4` Die Datei ist lesbar  
 
  **0754**
 
@@ -1853,3 +1935,36 @@ Chmode
 - Auf benutzerebene ist die Datei ausführbar , schreibbar, lesbar (`1+2+4=7`)
 - Auf Gruppenebene ist die Datei lesbar und ausführbar (`4+1=5`), aber nicht schreibbar
 - Für alles anderen ist die Datei nur lesbar
+
+### Complete Tables
+
+| Binary | Octal |    File    |    Dir     | Meaning                 |
+| :----: | :---: | :--------: | :--------: | :---------------------- |
+|  000   |   0   |    rw-     |    rwx     | no permissions          |
+|  001   |   1   |    rw-     |    rw-     | execute only            |
+|  010   |   2   |    r--     |    r-x     | write only              |
+|  011   |   3   |    r--     |    r--     | write and execute       |
+|  100   |   4   |    -w-     |    -wx     | read only               |
+|  101   |   5   |    -w-     |    -w-     | read and execute        |
+|  110   |   6   |    --x     |    --x     | read and write          |
+|  111   |   7   | --- (none) | --- (none) | read, write and execute |
+
+### Default Permissions
+
+| Permission         | File  |       |       |  Dir  |       |       |
+| ------------------ | :---: | :---: | :---: | :---: | :---: | :---: |
+|                    | user  | group | other | user  | group | other |
+| Predefined initial |   6   |   6   |   6   |   7   |   7   |   7   |
+| Umask              |   0   |   2   |   2   |   0   |   2   |   2   |
+| Default            |   6   |   4   |   4   |   7   |   5   |   5   |
+
+
+To determine the umask value you want to set, subtract the value of the permissions you want from `666` (for a file) or `777` (for a directory). 
+
+### How to change permissions for a folder and its subfolders/files
+
+- To change all the directories to 755 (drwxr-xr-x):  
+    `find /opt/lampp/htdocs -type d -exec chmod 755 {} \;`
+
+- To change all the files to 644 (-rw-r--r--):  
+    `find /opt/lampp/htdocs -type f -exec chmod 644 {} \;`
