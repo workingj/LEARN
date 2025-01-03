@@ -187,6 +187,14 @@ $bgColor = 'red';
 - [`eval()`](https://www.php.net/manual/de/function.eval.php) Sprach Konstrukt das gegebenen Code auswertet und bei return mit null oder gegebenem Wert zurück kehrt
 - ein loses returnstatement in einem script, beendet einen script und kann einen variable über include zurückgeben
 
+### Differences between die() and exit() Functions:
+
+| die()                                            | exit()                                                                            |
+| ------------------------------------------------ | --------------------------------------------------------------------------------- |
+| The die() method is used to throw an exception   | The exit() method is only used to exit the process.                               |
+| The die() function is used to print the message. | The exit() method exits the script or it may be used to print alternate messages. |
+| This method is from die() in Perl.               | This method is from exit() in C.                                                  |
+
 ## Ausdrücke
 
 - alles was einen Wert het oder zurück gibt
@@ -1410,7 +1418,7 @@ header("Location: http://localhost/index.php");
 die(); // um asführung des PHP-Scripts zu beenden
 ```
 
-## SESSIONS
+## Sessions
 
 - eine Datei die auf dem Server gespeichert wird
 - der browser erhält nur die id davon
@@ -1425,7 +1433,7 @@ var_dump($_SESSION);
 var_dump(session_save_path());
 ```
 
-## COOKIES
+## Cookies
 
 - `$_COOKIE` Enthält nur Cookies die der Browser mitschickt
 - Solange keine geschcikt wurden ist er lehr, und nach dem setcookie()
