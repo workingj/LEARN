@@ -1627,7 +1627,8 @@ echo '<H4>Es ist ein Fehler aufgetreten...</H4>';
 `- date_default_timezone_set('UTC');`
 
 ```php
-$d = time(); # Unixtimestamp
+date_default_timezone_set('UTC'); # Set the default Timzone to use
+$d = time(); # Unix timestamp - NOW!
 $d = mktime(12, 4, 5, 12, 20, 2050); # Timstamp from Date
 date('Y-m-d', $d); # Convert to human readable Timestamp
 date("H:i", time());
