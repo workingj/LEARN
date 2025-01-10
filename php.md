@@ -514,25 +514,25 @@ $str = ob_get_clean();
 
 #### Truth table
 
-|         | “”    | “apple” | NULL  | FALSE | 0     | undefined      | TRUE  | array() | 123   |
-| ------- | ----- | ------- | ----- | ----- | ----- | -------------- | ----- | ------- | ----- |
-| isset   | TRUE  | TRUE    | FALSE | TRUE  | TRUE  | FALSE          | TRUE  | TRUE    | TRUE  |
-| empty   | TRUE  | FALSE   | TRUE  | TRUE  | TRUE  | TRUE           | FALSE | TRUE    | FALSE |
-| is_null | FALSE | FALSE   | TRUE  | FALSE | FALSE | Warning / TRUE | FALSE | FALSE   | FALSE |
+|           | “”    | “apple” | NULL  | FALSE | 0     | undefined      | TRUE  | array() | 123   |
+| --------- | ----- | ------- | ----- | ----- | ----- | -------------- | ----- | ------- | ----- |
+| isset()   | TRUE  | TRUE    | FALSE | TRUE  | TRUE  | FALSE          | TRUE  | TRUE    | TRUE  |
+| empty()   | TRUE  | FALSE   | TRUE  | TRUE  | TRUE  | TRUE           | FALSE | TRUE    | FALSE |
+| is_null() | FALSE | FALSE   | TRUE  | FALSE | FALSE | Warning / TRUE | FALSE | FALSE   | FALSE |
 
 #### Differences table
 
-| Value of $var           | isset | empty | is_null      |
-| ----------------------- | ----- | ----- | ------------ |
-| “” (empty string)       | TRUE  | TRUE  | FALSE        |
-| ‘apple’ (string value)  | TRUE  | FALSE | FALSE        |
-| null (declaration-only) | FALSE | TRUE  | TRUE         |
-| FALSE                   | TRUE  | TRUE  | FALSE        |
-| 0                       | TRUE  | TRUE  | FALSE        |
-| undefined  variable     | FALSE | TRUE  | WARNING/TRUE |
-| TRUE                    | TRUE  | FALSE | FALSE        |
-| array() (empty array)   | TRUE  | TRUE  | FALSE        |
-| 123 (numeric value)     | TRUE  | FALSE | FALSE        |
+| Value of $var           | isset() | empty() | is_null()    |
+| ----------------------- | ------- | ------- | ------------ |
+| “” (empty string)       | TRUE    | TRUE    | FALSE        |
+| ‘apple’ (string value)  | TRUE    | FALSE   | FALSE        |
+| null (declaration-only) | FALSE   | TRUE    | TRUE         |
+| FALSE                   | TRUE    | TRUE    | FALSE        |
+| 0                       | TRUE    | TRUE    | FALSE        |
+| undefined  variable     | FALSE   | TRUE    | WARNING/TRUE |
+| TRUE                    | TRUE    | FALSE   | FALSE        |
+| array() (empty array)   | TRUE    | TRUE    | FALSE        |
+| 123 (numeric value)     | TRUE    | FALSE   | FALSE        |
 
 ## Datentypen
 
