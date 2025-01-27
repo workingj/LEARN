@@ -918,6 +918,11 @@ if ($s instanceof Person) {
 }
 ```
 
+#### Traits vs Interfaces
+
+- **Traits** provide horizontal reuse of methods: a class that uses a trait mixes in the implementation of a set of methods. 
+- **Interfaces** provide a promise of a class's implementation: a class that implements an interface is guaranteed to provide a set of methods.
+
 ### OOP - Vererbung
 
 - Überschriebene Methoden müssen diegleiche Signatur haben, wie Elternklasse
@@ -1158,7 +1163,6 @@ $c2 = Container::getInstance();
 
 var_dump($c1);
 var_dump($c2);
-
 ```
 
 ## Namespaces
